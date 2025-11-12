@@ -1,1 +1,14 @@
-site_name: My Docs
+site_name: elte-databases Documentation
+theme: material
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Introduction: docs/introduction.md
+    - Installation: docs/installation.md
+  - Guides:
+    - User Guide: docs/user-guide.md
+    - Advanced Topics: docs/advanced.md
+  - About:
+    - Project Overview: docs/overview.md
+    - Contact: docs/contact.md
