@@ -25,3 +25,9 @@ theme:
         name: Switch to light mode    
       primary: red
       accent: blue
+nav:
+  - Introduction:
+    - Overview: introduction.md
+    - Course Overview: course_overview.md
+    - Getting Started: getting_started.md
+  - SQL Basics: sql_basics.md
