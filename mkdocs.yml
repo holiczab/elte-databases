@@ -94,7 +94,6 @@ nav:
     - CREATE TABLE Statement: sql/create_table_statement.md
     - VIEW: sql/view.md
   - Relational Algebra: sql/relational_algebra.md  # Moved to end as a theoretical capstone
-
 - PL/SQL Concepts:
   - Overview: pl_sql/plsql_overview.md
   - Fundamentals:
@@ -126,9 +125,7 @@ nav:
     - Functions and Procedures: pl_sql/functions_procedures.md
     - PL/SQL Units: pl_sql/plsql_units.md
     - Recursion and Datalog: pl_sql/recursion_datalog.md
-
 - PL/SQL Optimization:
-  - Overview: pl_sql/plsql_overview.md
-
+  - Overview: pl_sql+1/plsql1_overview.md
 - Advanced PL/SQL:
-  - Overview: pl_sql/plsql_overview.md
+  - Overview: pl_sql+2/plsql2_overview.md
