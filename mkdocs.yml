@@ -26,89 +26,103 @@ theme:
       primary: red
       accent: blue
 nav:
-  - SQL Basics:
-    - Overview: sql/sql_overview.md
-    - Introduction:
-      - Course Overview: sql/course_overview.md
-      - Getting Started: sql/getting_started.md
+- SQL Basics:
+  - Overview: sql/sql_overview.md
+  - Introduction:
+    - Course Overview: sql/course_overview.md
+    - Getting Started: sql/getting_started.md
     - Entity Relationship Model: sql/entity_relationship_model.md
-    - Communicating with an RDBMS Using SQL: sql/communicating_with_rdbms.md
+  - Data Types:
+    - Overview: sql/data_types_overview.md  # New file for intro to data types
+    - Numbers: sql/data_types_numbers.md
+    - Strings: sql/data_types_strings.md
+    - Date and Time: sql/data_types_date_time.md
+    - Conversion: sql/data_types_conversion.md
+  - Communicating with RDBMS: sql/communicating_with_rdbms.md
+  - SQL*Plus: sql/sql_plus.md  # Moved here as it’s a tool for interacting with RDBMS
+  - Basic Queries:
     - SELECT Statement: sql/select_statement.md
-    - Arithmetic Expressions: sql/arithmetic_expressions.md
     - Column Alias: sql/column_alias.md
+    - Arithmetic Expressions: sql/arithmetic_expressions.md
     - Concatenation Operator: sql/concatenation_operator.md
     - Duplicate Rows: sql/duplicate_rows.md
-    - SQL*Plus: sql/sql_plus.md
+  - Filtering and Sorting:
     - WHERE Clause: sql/where_clause.md
     - Comparison Conditions: sql/comparison_conditions.md
     - LIKE Condition: sql/like_condition.md
     - Logical Conditions: sql/logical_conditions.md
     - Rules of Precedence: sql/rules_of_precedence.md
     - ORDER BY Clause: sql/order_by_clause.md
-    - Substitution Variables: sql/substitution_variables.md
-    - Set Operators: sql/set_operators.md
-    - Data Types:
-      - Numbers: sql/data_types_numbers.md
-      - Strings: sql/data_types_strings.md
-      - Date and Time: sql/data_types_date_time.md
-      - Conversion: sql/data_types_conversion.md
-    - SQL Functions:
-      - Single-Row Functions: sql/single_row_functions.md
-      - Character Functions: sql/character_functions.md
-      - Number Functions: sql/number_functions.md
-      - Date Functions: sql/date_functions.md
-      - Conversion Functions: sql/conversion_functions.md
-      - Nesting Functions: sql/nesting_functions.md
-      - General Functions: sql/general_functions.md
-      - Case Expression: sql/case_expression.md
-      - Decode Function: sql/decode_function.md
-      - Group Functions: sql/group_functions.md
+  - SQL Functions:
+    - Overview: sql/functions_overview.md  # New file for intro to functions
+    - Single-Row Functions: sql/single_row_functions.md
+    - Character Functions: sql/character_functions.md
+    - Number Functions: sql/number_functions.md
+    - Date Functions: sql/date_functions.md
+    - Conversion Functions: sql/conversion_functions.md
+    - General Functions: sql/general_functions.md
+    - Nesting Functions: sql/nesting_functions.md
+    - Group Functions: sql/group_functions.md
+    - Case Expression: sql/case_expression.md
+    - Decode Function: sql/decode_function.md
+  - Grouping Data:
     - GROUP BY Clause: sql/group_by_clause.md
     - HAVING Clause: sql/having_clause.md
-    - JOIN:
-      - Natural Join: sql/natural_join.md
-      - Join: sql/join.md
-      - Self-Join: sql/self_join.md
-      - Additional Conditions: sql/join_additional_conditions.md
-      - Non-Equijoins: sql/non_equijoins.md
-      - Outer Joins: sql/outer_joins.md
-      - Cartesian Products: sql/cartesian_products.md
+  - Joins:
+    - Overview: sql/joins_overview.md  # New file for intro to joins
+    - Natural Join: sql/natural_join.md
+    - Join: sql/join.md
+    - Self-Join: sql/self_join.md
+    - Additional Conditions: sql/join_additional_conditions.md
+    - Non-Equijoins: sql/non_equijoins.md
+    - Outer Joins: sql/outer_joins.md
+    - Cartesian Products: sql/cartesian_products.md
+  - Advanced Queries:
     - Subquery: sql/subquery.md
     - EXISTS Operator: sql/exists_operator.md
     - WITH Clause: sql/with_clause.md
-    - Data Manipulation Language:
-      - INSERT Statement: sql/insert_statement.md
-      - UPDATE Statement: sql/update_statement.md
-      - DELETE Statement: sql/delete_statement.md
-      - TRUNCATE Statement: sql/truncate_statement.md
-    - Database Transactions: sql/database_transactions.md
-    - Database Objects: sql/database_objects.md
+    - Set Operators: sql/set_operators.md
+    - Substitution Variables: sql/substitution_variables.md
+  - Data Manipulation Language:
+    - INSERT Statement: sql/insert_statement.md
+    - UPDATE Statement: sql/update_statement.md
+    - DELETE Statement: sql/delete_statement.md
+    - TRUNCATE Statement: sql/truncate_statement.md
+  - Database Transactions: sql/database_transactions.md
+  - Database Objects:
+    - Overview: sql/database_objects_overview.md  # New file for intro to objects
     - CREATE TABLE Statement: sql/create_table_statement.md
     - VIEW: sql/view.md
-    - Relational Algebra: sql/relational_algebra.md
-  - PL/SQL:
-    - Overview: pl_sql/plsql_overview.md
+  - Relational Algebra: sql/relational_algebra.md  # Moved to end as a theoretical capstone
+
+- PL/SQL:
+  - Overview: pl_sql/plsql_overview.md
+  - Fundamentals:
     - PL/SQL Block: pl_sql/plsql_block.md
     - Lexical Elements: pl_sql/lexical_elements.md
     - Variables and Constants: pl_sql/variables_constants.md
-    - /%TYPE: pl_sql/percent_type.md
-    - /%ROWTYPE: pl_sql/percent_rowtype.md
-    - PL/SQL Units: pl_sql/plsql_units.md
-    - Operators: pl_sql/plsql_operators.md
-    - Datatype Conversion: pl_sql/plsql_datatype_conversion.md
-    - Concatenation: pl_sql/plsql_concatenation.md
-    - Lazy Evaluation: pl_sql/lazy_evaluation.md
+    - '%TYPE': pl_sql/percent_type.md
+    - '%ROWTYPE': pl_sql/percent_rowtype.md
     - Subtypes: pl_sql/subtypes.md
-    - Blank-Padded Semantics: pl_sql/blank_padded_semantics.md
+    - Datatype Conversion: pl_sql/plsql_datatype_conversion.md
+  - Operators and Expressions:
+    - Operators: pl_sql/plsql_operators.md
+    - Concatenation: pl_sql/plsql_concatenation.md
     - Logical Expressions: pl_sql/plsql_logical_expressions.md
-    - Retrieving Data: pl_sql/retrieving_data.md
+    - Lazy Evaluation: pl_sql/lazy_evaluation.md
+    - Blank-Padded Semantics: pl_sql/blank_padded_semantics.md
+  - Control Structures:
     - Control Statements: pl_sql/control_statements.md
     - Scope and Visibility: pl_sql/scope_visibility.md
-    - Bind Variables: pl_sql/bind_variables.md
-    - SERVEROUTPUT: pl_sql/serveroutput.md
-    - Input from the User: pl_sql/user_input.md
+  - Data Retrieval and Interaction:
+    - Retrieving Data: pl_sql/retrieving_data.md
     - Cursor: pl_sql/cursor.md
+    - Bind Variables: pl_sql/bind_variables.md
+    - Input from the User: pl_sql/user_input.md
+    - SERVEROUTPUT: pl_sql/serveroutput.md
+  - Advanced Features:
     - Collections: pl_sql/collections.md
     - Exceptions: pl_sql/exceptions.md
     - Functions and Procedures: pl_sql/functions_procedures.md
+    - PL/SQL Units: pl_sql/plsql_units.md
     - Recursion and Datalog: pl_sql/recursion_datalog.md
