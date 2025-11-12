@@ -95,7 +95,7 @@ nav:
     - VIEW: sql/view.md
   - Relational Algebra: sql/relational_algebra.md  # Moved to end as a theoretical capstone
 
-- PL/SQL:
+- PL/SQL Concepts:
   - Overview: pl_sql/plsql_overview.md
   - Fundamentals:
     - PL/SQL Block: pl_sql/plsql_block.md
@@ -126,3 +126,9 @@ nav:
     - Functions and Procedures: pl_sql/functions_procedures.md
     - PL/SQL Units: pl_sql/plsql_units.md
     - Recursion and Datalog: pl_sql/recursion_datalog.md
+
+- PL/SQL Optimization:
+  - Overview: pl_sql/plsql_overview.md
+
+- Advanced PL/SQL:
+  - Overview: pl_sql/plsql_overview.md
