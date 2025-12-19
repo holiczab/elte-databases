@@ -27,19 +27,17 @@ theme:
       accent: blue
 nav:
 - SQL Basics:
-  - Overview: sql/sql_overview.md
   - Introduction:
-    - Course Overview: sql/course_overview.md
-    - Getting Started: sql/getting_started.md
+    - Introduction: sql/introduction.md
     - Entity Relationship Model: sql/entity_relationship_model.md
   - Data Types:
-    - Overview: sql/data_types_overview.md  # New file for intro to data types
+    - Overview: sql/data_types_overview.md
     - Numbers: sql/data_types_numbers.md
     - Strings: sql/data_types_strings.md
     - Date and Time: sql/data_types_date_time.md
     - Conversion: sql/data_types_conversion.md
   - Communicating with RDBMS: sql/communicating_with_rdbms.md
-  - SQL*Plus: sql/sql_plus.md  # Moved here as it’s a tool for interacting with RDBMS
+  - SQL*Plus: sql/sql_plus.md
   - Basic Queries:
     - SELECT Statement: sql/select_statement.md
     - Column Alias: sql/column_alias.md
@@ -54,7 +52,7 @@ nav:
     - Rules of Precedence: sql/rules_of_precedence.md
     - ORDER BY Clause: sql/order_by_clause.md
   - SQL Functions:
-    - Overview: sql/functions_overview.md  # New file for intro to functions
+    - Overview: sql/functions_overview.md
     - Single-Row Functions: sql/single_row_functions.md
     - Character Functions: sql/character_functions.md
     - Number Functions: sql/number_functions.md
@@ -69,7 +67,7 @@ nav:
     - GROUP BY Clause: sql/group_by_clause.md
     - HAVING Clause: sql/having_clause.md
   - Joins:
-    - Overview: sql/joins_overview.md  # New file for intro to joins
+    - Overview: sql/joins_overview.md
     - Natural Join: sql/natural_join.md
     - Join: sql/join.md
     - Self-Join: sql/self_join.md
@@ -90,10 +88,10 @@ nav:
     - TRUNCATE Statement: sql/truncate_statement.md
   - Database Transactions: sql/database_transactions.md
   - Database Objects:
-    - Overview: sql/database_objects_overview.md  # New file for intro to objects
+    - Overview: sql/database_objects_overview.md
     - CREATE TABLE Statement: sql/create_table_statement.md
     - VIEW: sql/view.md
-  - Relational Algebra: sql/relational_algebra.md  # Moved to end as a theoretical capstone
+  - Relational Algebra: sql/relational_algebra.md
 - PL/SQL Concepts:
   - Overview: pl_sql/plsql_overview.md
   - Fundamentals:
@@ -126,6 +124,6 @@ nav:
     - PL/SQL Units: pl_sql/plsql_units.md
     - Recursion and Datalog: pl_sql/recursion_datalog.md
 - PL/SQL Optimization:
-  - Overview: pl_sql+1/plsql1_overview.md
+  - Overview: pl_sql_db2_1/plsql1_overview.md
 - Advanced PL/SQL:
-  - Overview: pl_sql+2/plsql2_overview.md
+  - Overview: pl_sql_db2_2/plsql2_overview.md
