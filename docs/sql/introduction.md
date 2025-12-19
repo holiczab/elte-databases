@@ -9,8 +9,8 @@
 
 A relational database is a collection of relations or two dimensional tables.
 
-![alt text](assets/introduction_1.png){ width=700 }
+![alt text](../assets/introduction_1.png){ width=700 }
 
 # Data models
 
-![alt text](assets/introduction_2.png){ width=700 }
+![alt text](../assets/introduction_2.png){ width=700 }
