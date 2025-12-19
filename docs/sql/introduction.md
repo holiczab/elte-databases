@@ -1,4 +1,3 @@
-
 # Structured Query Language (SQL):
 
 - Dr. E. F. Codd proposed the relational model fordatabase systems in 1970.
@@ -10,8 +9,8 @@
 
 A relational database is a collection of relations or two dimensional tables.
 
-<img src="assets/introduction_1.png" alt="alt text" width="700" />
+![alt text](assets/introduction_1.png){ width=700 }
 
 # Data models
 
-<img src="assets/introduction_2.png" alt="alt text" width="700" />
+![alt text](assets/introduction_2.png){ width=700 }

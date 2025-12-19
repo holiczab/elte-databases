@@ -25,6 +25,11 @@ theme:
         name: Switch to light mode    
       primary: red
       accent: blue
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+
 nav:
 - SQL Basics:
   - Introduction:
