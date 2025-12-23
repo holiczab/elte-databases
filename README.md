@@ -1,1 +1,1 @@
-# ELTE Databases classes practice notes 🗄️🔑
+# ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES 🗄️🔑
