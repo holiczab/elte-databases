@@ -1,5 +1,6 @@
 site_name: ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
 theme:
+  logo: assets/database.png
   name: material
   features:
     - navigation.tabs
@@ -17,14 +18,14 @@ theme:
       toggle:
         icon: material/toggle-switch-off-outline 
         name: Switch to dark mode
-      primary: red
-      accent: blue 
+      primary: blue
+      accent: teal 
     - scheme: slate 
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode    
-      primary: red
-      accent: blue
+      primary: blue
+      accent: teal
 
 markdown_extensions:
   - attr_list
