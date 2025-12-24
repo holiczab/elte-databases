@@ -57,8 +57,8 @@ nav:
   - P9: pl_sql/P9.md
   - P10: pl_sql/P10.md
   - P11: pl_sql/P11.md
-- PL/SQL Optimization
-- Advanced PL/SQL
+# - PL/SQL Optimization
+# - Advanced PL/SQL
 
 extra:
   generator: false
