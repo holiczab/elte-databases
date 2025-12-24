@@ -1,4 +1,4 @@
-site_name: ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES - HOLICZA BARNABÁS
+site_name: ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
 theme:
   name: material
   features:
@@ -33,10 +33,16 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
   
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 nav:
 - SQL Basics:
   - P1: sql/P1.md
@@ -52,3 +58,8 @@ nav:
   - P11: pl_sql/P11.md
 - PL/SQL Optimization
 - Advanced PL/SQL
+
+extra:
+  generator: false
+
+copyright: Copyright &copy; <script>document.write(new Date().getFullYear())</script> Holicza Barnabás & ELTE
