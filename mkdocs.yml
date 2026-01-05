@@ -47,7 +47,7 @@ extra_javascript:
 nav:
 - Practice Guides:
   - DB1 Practice Guide: topics.md
-  - DB2 Practice Guide
+  - DB2 Practice Guide: none.md
 - SQL Basics:
   - Relational Model: sql/01_Relational_Model.md
   - SELECT Statement: sql/02_SELECT_Statement.md
@@ -69,8 +69,8 @@ nav:
   - Cursors: pl_sql/02_Cursors.md
   - Exception Handling: pl_sql/03_Exception_Handling.md
   - Recursion: pl_sql/04_Recursion.md
-- PL/SQL Optimization
-- Advanced PL/SQL
+- PL/SQL Optimization: none.md
+- Advanced PL/SQL: none.md
 
 extra:
   generator: false
