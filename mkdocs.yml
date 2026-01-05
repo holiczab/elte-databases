@@ -45,20 +45,32 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
+- Practice Guides:
+  - DB1 Practice Guide: topics.md
+  - DB2 Practice Guide
 - SQL Basics:
-  - P1: sql/P1.md
-  - P2: sql/P2.md
-  - P3: sql/P3.md
-  - P4: sql/P4.md
-  - P5: sql/P5.md
-  - P6: sql/P6.md
+  - Relational Model: sql/01_Relational_Model.md
+  - SELECT Statement: sql/02_SELECT_Statement.md
+  - Set Operators: sql/03_Set_Operators.md
+  - Character Functions: sql/04_Character_Functions.md
+  - Number Functions: sql/05_Number_Functions.md
+  - Date Functions: sql/06_Date_Functions.md
+  - Conversion Functions: sql/07_Conversion_Functions.md
+  - Aggregate Functions: sql/08_Aggregate_Functions.md
+  - Subqueries: sql/09_Subqueries.md
+  - Relational Algebra: sql/10_Relational_Algebra.md
+  - Joins: sql/11_Joins.md
+  - DML: sql/12_DML.md
+  - Transactions: sql/13_Transactions.md
+  - DDL: sql/14_DDL.md
+  - Views: sql/15_Views.md
 - PL/SQL Concepts:
-  - P8: pl_sql/P8.md
-  - P9: pl_sql/P9.md
-  - P10: pl_sql/P10.md
-  - P11: pl_sql/P11.md
-# - PL/SQL Optimization
-# - Advanced PL/SQL
+  - PL/SQL Basics: pl_sql/01_PL_SQL_Basics.md
+  - Cursors: pl_sql/02_Cursors.md
+  - Exception Handling: pl_sql/03_Exception_Handling.md
+  - Recursion: pl_sql/04_Recursion.md
+- PL/SQL Optimization
+- Advanced PL/SQL
 
 extra:
   generator: false
