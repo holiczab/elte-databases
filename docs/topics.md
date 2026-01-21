@@ -5,7 +5,7 @@
 ## Part 1: Foundational Topics (SQL)
 
 ### Practice 1: Introduction, Basics, and Set Operators
-**Objective:** Gain an understanding of the relational model, fundamental data retrieval techniques, and methods for combining datasets.
+**Objective:** Gain an understanding of the relational model, fundamental data retrieval techniques for datasets.
 
 **Topics Covered:**
 - Relational Model
