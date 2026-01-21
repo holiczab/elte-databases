@@ -1,4 +1,4 @@
-# Benefits of PL/SQL
+## Benefits of PL/SQL
 
 Improved Performance
 
@@ -29,12 +29,12 @@ Division by zero
 </pre>
 
 
-# Block Types
+## Block Types
 
 ![alt text](../assets/P8/block.png){ width=700 }
 
-# Lexical elements of the PL/SQL language: 
-# Delimiters, identifiers, literals, comments
+## Lexical elements of the PL/SQL language: 
+## Delimiters, identifiers, literals, comments
 
 Examples for delimiters:
 
@@ -44,12 +44,12 @@ Examples for delimiters:
 - '>>'  Label delimiter (end)
 - '!='  Relational operator (not equal)
 
-# Identifiers can denote the following PL/SQL objects:
+## Identifiers can denote the following PL/SQL objects:
 
 - Constants, Cursors,  Exceptions, Keywords, Labels,  Packages Reserved words, Subprograms, Variables, Types
 - Predefined identifiers in STANDARD package, e.g. ZERO_DIVIDE exception
 
-# Literals (numeric, character, string, logical, date)
+## Literals (numeric, character, string, logical, date)
 
 - integer:       12
 - real:          12.0
@@ -59,7 +59,7 @@ Examples for delimiters:
 - date:        DATE '2011-12-25' 
 
 
-# Comments: single line and multiline
+## Comments: single line and multiline
 
 -- single line comment
 
@@ -68,7 +68,7 @@ Examples for delimiters:
 */
 
 
-# Variables
+## Variables
 
 - PL/SQL variables:
 
@@ -107,7 +107,7 @@ END;
 /
 ```
 
-# Variable Initialization and Keywords
+## Variable Initialization and Keywords
 
 Using:
 
@@ -115,7 +115,7 @@ Using:
 - DEFAULT keyword
 - NOT NULL constraint
 
-# Base Scalar Datatypes
+## Base Scalar Datatypes
 
 - VARCHAR2 (maximum_length)
 - NUMBER [(precision, scale)]
@@ -153,7 +153,7 @@ END;
 /
 ```
 
-# Declaring Boolean Variables
+## Declaring Boolean Variables
 
 - Only the values TRUE, FALSE, and NULL can be assigned to a Boolean variable.
 - The variables are connected by the logical operators AND, OR, and NOT.
@@ -161,7 +161,7 @@ END;
 - Arithmetic, character, and date expressions can be used to return a Boolean value.
 
 
-# Composite Datatypes
+## Composite Datatypes
 
 - PL/SQL TABLES
 - PL/SQL RECORDS
@@ -278,7 +278,7 @@ END;
 /
 ```
 
-# PL/SQL units are the following:
+## PL/SQL units are the following:
 
 - PL/SQL anonymous block
 - FUNCTION
@@ -341,7 +341,7 @@ Results:
 501
 </pre>
 
-# Operators in PL/SQL
+## Operators in PL/SQL
 
 Examples:
 
@@ -377,7 +377,7 @@ Results:
 bonus = 95
 </pre>
 
-# Datatype Conversion
+## Datatype Conversion
 
 - Convert data to comparable datatypes.
 - Mixed datatypes can result in an error and affect performance.
@@ -477,7 +477,7 @@ Results:
 On hand quantity is zero.
 </pre>
 
-# Subtypes
+## Subtypes
 
 Unconstrained (gives only an alias for compatibility purpose)
 
@@ -497,7 +497,7 @@ Predefined subtypes in STANDARD package, you can see them with the following que
 SELECT text FROM all_source WHERE type='PACKAGE' and name='STANDARD' ORDER BY line;
 ```
 
-# Examples from the package:
+## Examples from the package:
 
 ```sql
 type BOOLEAN is (FALSE, TRUE);
@@ -677,7 +677,7 @@ END;
 /
 ```
 
-# Logic Tables
+## Logic Tables
 
 Build a simple Boolean condition with a comparison operator.
 
@@ -685,7 +685,7 @@ Build a simple Boolean condition with a comparison operator.
 
 Any arithmetic expression containing a null value evaluates to NULL.
 
-# Retrieving Data in PL/SQL
+## Retrieving Data in PL/SQL
 
 Retrieve the order date and the ship date for the specified order.
 
@@ -702,7 +702,7 @@ BEGIN
 END;
 ```
 
-# Updating Data
+## Updating Data
 
 Increase the salary of all employees in the emp table who are Analysts.
 
@@ -716,9 +716,9 @@ BEGIN
 END;
 ```
    
-# Control statements
+## Control statements
 
-# IF THEN
+## IF THEN
 
 ```sql
 IF condition THEN
@@ -726,7 +726,7 @@ IF condition THEN
 END IF;
 ```
 
-# IF THEN ELSE
+## IF THEN ELSE
 
 ```sql
 IF condition THEN
@@ -736,7 +736,7 @@ ELSE
 END IF;
 ```
 
-# IF THEN ELSIF
+## IF THEN ELSIF
 
 ```sql
 IF condition_1 THEN
@@ -752,7 +752,7 @@ ELSIF condition_2 THEN
 END IF;
 ```
 
-# Simple CASE statement
+## Simple CASE statement
 
 CASE_NOT_FOUND exception if none of them is true
 
@@ -766,7 +766,7 @@ WHEN selector_value_n THEN statements_n
 END CASE;
 ```
 
-# Searched CASE statement
+## Searched CASE statement
 
 CASE_NOT_FOUND exception if none of them is true
 
@@ -780,7 +780,7 @@ WHEN condition_n THEN statements_n
 END CASE;
 ```
 
-# Basic LOOP
+## Basic LOOP
 
 ```sql
 [ label ] LOOP
@@ -788,7 +788,7 @@ END CASE;
 END LOOP [ label ];
 ```
 
-# Exit from loop / starting a new iteration
+## Exit from loop / starting a new iteration
 
 ```sql
 EXIT
@@ -797,7 +797,7 @@ CONTINUE
 CONTINUE WHEN
 ```
 
-# WHILE LOOP
+## WHILE LOOP
 
 ```sql
 [ label ] WHILE condition LOOP
@@ -805,7 +805,7 @@ CONTINUE WHEN
 END LOOP [ label ];
 ```
 
-# FOR LOOP
+## FOR LOOP
 
 ```sql
 [ label ] FOR index IN [ REVERSE ] lower_bound..upper_bound LOOP
@@ -932,7 +932,7 @@ END;
 print v;
 ```
 
-# Using Bind Variables
+## Using Bind Variables
 
 To reference a bind variable in PL/SQL, you must prefix its name with a colon (:).
 
@@ -958,7 +958,7 @@ END;
 /
 ```
 
-# Use SET SERVEROUTPUT ON  
+## Use SET SERVEROUTPUT ON  
 
 A PL/SQL program actually doesn't print on the screen.
 
@@ -1081,7 +1081,7 @@ NEW YORK
 300
 </pre>
 
-# PL/SQL Records
+## PL/SQL Records
 
 - Must contain one or more components of any scalar, RECORD, or PL/SQL TABLE datatype, called fields
 - Are similar in structure to records in a 3GL
@@ -1090,7 +1090,7 @@ NEW YORK
 - Are convenient for fetching a row of data from a table for processing
 
 
-# Using PL/SQL Table Methods
+## Using PL/SQL Table Methods
 
 The following methods make PL/SQL tables easier to use:
 
@@ -1104,7 +1104,7 @@ The following methods make PL/SQL tables easier to use:
 - DELETE
 
 
-# PL/SQL Tables
+## PL/SQL Tables
 
 - Are composed of two components:
     - Primary key of datatype BINARY_INTEGER
@@ -1113,7 +1113,7 @@ The following methods make PL/SQL tables easier to use:
 - Increase dynamically because they are unconstrained
    
 
-# The %ROWTYPE Attribute
+## The %ROWTYPE Attribute
 
 - Declare a variable according to a collection of columns in a database table or view.
 - Prefix %ROWTYPE with the database table.

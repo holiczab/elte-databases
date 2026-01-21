@@ -1,4 +1,4 @@
-# Exceptions
+## Exceptions
 
 ![alt text](../assets/P10/exception.png){ width=700 }
 
@@ -133,7 +133,7 @@ RAISE_APPLICATION_ERROR Procedure:
    - A procedure that lets you issue user-defined error messages from stored subprograms
    - Called only from an executing stored subprogram
 
-# Predefined exceptions
+## Predefined exceptions
 
 ```sql
 SELECT text FROM all_source WHERE type = 'PACKAGE'
@@ -246,15 +246,15 @@ END;
 /
 ```
 
-# Functions and procedures
+## Functions and procedures
 
-# Procedural Parameter Modes
+## Procedural Parameter Modes
 
 ![alt text](../assets/P10/parameters.png){ width=700 }
 
 ![alt text](../assets/P10/modes.png){ width=700 }
 
-# IN Parameters
+## IN Parameters
 
 7369 ↔ v_id
 
@@ -276,7 +276,7 @@ SQL> EXECUTE raise_salary (7369)
 
 PL/SQL procedure successfully completed.
 
-# OUT Parameters
+## OUT Parameters
 
 Calling environment
 
@@ -302,7 +302,7 @@ END query_emp;
 /
 ```
 
-# IN OUT Parameters
+## IN OUT Parameters
 
 Calling environment
 
@@ -401,7 +401,7 @@ END;
 /
 ```
 
-# Examples of Passing Parameters
+## Examples of Passing Parameters
 
 ```sql
 begin
@@ -466,13 +466,13 @@ Results:
 0; 1; 2; 3; 6; 7;
 </pre>
 
-# Executing Functions
+## Executing Functions
 
 - Invoke a function as part of a PL/SQL expression.
 - Create a host variable to hold the returned value.
 - Execute the function. The host variable will be populated by the RETURN value.
 
-# Executing Functions in SQL*Plus
+## Executing Functions in SQL*Plus
 
 ![alt text](../assets/P10/plus.png){ width=700 }
 
@@ -515,7 +515,7 @@ Cnt: 0
 Cnt: 1
 </pre>
 
-# Calling Functions from SQL Expressions: Restrictions
+## Calling Functions from SQL Expressions: Restrictions
 
 - A user-defined function must be a stored function.
 - A user-defined function must be a ROW function, not a GROUP function.
@@ -525,7 +525,7 @@ Cnt: 1
 - INSERT, UPDATE, or DELETE commands are not allowed.
 - Calls to subprograms that break the above restriction are not allowed.
 
-# Procedure or Function?
+## Procedure or Function?
 
 ![alt text](../assets/P10/porf.png){ width=700 }
 

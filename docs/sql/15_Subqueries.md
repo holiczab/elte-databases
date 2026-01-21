@@ -1,8 +1,8 @@
-# Using a Subquery to Solve a Problem
+## Using a Subquery to Solve a Problem
 
 ![alt text](../assets/P4/sub.png){ width=700 }
 
-# Subquery Syntax
+## Subquery Syntax
 
 ```sql
 SELECT  select_list
@@ -37,18 +37,18 @@ WHERE last_name = 'Abel');
 | Hartstein            |
 | Higgins              |
 
-# Guidelines for Using Subqueries
+## Guidelines for Using Subqueries
 
 - Enclose subqueries in parentheses.
 - Place subqueries on the right side of the comparison condition.
 - The ORDER BY clause in the subquery is not needed unless you are performing Top-N analysis.
 - Use single-row operators with single-row subqueries, and use multiple-row operators with multiple-row subqueries.
 
-# Types of Subqueries
+## Types of Subqueries
 
 ![alt text](../assets/P4/typessub.png){ width=700 }
 
-# Single-Row Subqueries
+## Single-Row Subqueries
 
 - Return **only one row**
 - Use single-row comparison operators
@@ -62,7 +62,7 @@ WHERE last_name = 'Abel');
 | <=       | Less than or equal to    |
 | <>       | Not equal to             |
 
-# Executing Single-Row Subqueries
+## Executing Single-Row Subqueries
 
 ```sql
 SELECT last_name, job_id, salary
@@ -89,7 +89,7 @@ WHERE employee_id = 143);
 | Stiles               | ST_CLERK             | 3200                 |
 | Seo                  | ST_CLERK             | 2700                 |
 
-# Using Group Functions in a Subquery
+## Using Group Functions in a Subquery
 
 ```sql
 SELECT last_name, job_id, salary
@@ -103,7 +103,7 @@ FROM nikovits.employees);
 |----------------------|----------------------|----------------------|
 | Olson                | ST_CLERK             | 2100                 |
 
-# The HAVING Clause with Subqueries
+## The HAVING Clause with Subqueries
 
 - The Oracle server executes subqueries first.
 - The Oracle server returns results into the HAVING clause of the main query.
@@ -118,7 +118,7 @@ HAVING   MIN(salary) >
           WHERE  department_id = 50);
 ```
 
-# What Is Wrong with This Statement?
+## What Is Wrong with This Statement?
 
 ```sql
 SELECT employee_id, last_name
@@ -133,7 +133,7 @@ WHERE  salary =
 
 Single-row operator with multiple-row subquery
 
-# Will This Statement Return Rows?
+## Will This Statement Return Rows?
 
 ```sql
 SELECT last_name, job_id
@@ -148,7 +148,7 @@ WHERE  job_id =
 
 Subquery returns no values.
 
-# Multiple-Row Subqueries
+## Multiple-Row Subqueries
 
 - Return **more than one row**
 - Use multiple-row comparison operators
@@ -159,7 +159,7 @@ Subquery returns no values.
 | ANY      | Compare value to each value returned by the subquery |
 | ALL      | Compare value to every value returned by the subquery |
 
-# Using the ANY Operator in Multiple-Row Subqueries
+## Using the ANY Operator in Multiple-Row Subqueries
 
 ```sql
 SELECT employee_id, last_name, job_id, salary
@@ -183,7 +183,7 @@ AND job_id <> 'IT_PROG';
 | 144                  | Vargas               | ST_CLERK             | 2500                 |
 | 140                  | Patel                | ST_CLERK             | 2500                 |
 
-# Using the ALL Operator in Multiple-Row Subqueries
+## Using the ALL Operator in Multiple-Row Subqueries
 
 ```sql
 SELECT employee_id, last_name, job_id, salary
@@ -210,7 +210,7 @@ AND job_id <> 'IT_PROG';
 | 180                  | Taylor               | SH_CLERK             | 3200                 |
 | 138                  | Stiles               | ST_CLERK             | 3200                 |
 
-# Null Values in a Subquery
+## Null Values in a Subquery
 
 ```sql
 SELECT  emp.last_name
@@ -224,7 +224,7 @@ no rows selected
 
 x NOT IN (A, B, NULL) → Unknown
 
-# Multiple-Column Subqueries
+## Multiple-Column Subqueries
 
 ```sql
 Main query
@@ -239,7 +239,7 @@ WHERE (MANAGER_ID, DEPARTMENT_ID) IN
 
 Each row of the main query is compared to values from a multiple-row and multiple-column subquery.
 
-# Pairwise Comparison Subquery
+## Pairwise Comparison Subquery
 
 Display the details of the employees who are managed by the same manager **and** work in the same department as the employees with `EMPLOYEE_ID` 199 or 174.
 
@@ -253,7 +253,7 @@ WHERE (manager_id, department_id) IN
 AND employee_id NOT IN (199, 174);
 ```
 
-# Nonpairwise Comparison Subquery
+## Nonpairwise Comparison Subquery
 
 Display the details of the employees who are managed by the same manager as the employees with `EMPLOYEE_ID` 174 or 199 **and** work in the same department as the employees with `EMPLOYEE_ID` 174 or 199.
 
@@ -271,14 +271,14 @@ AND department_id IN
 AND employee_id NOT IN (174, 199);
 ```
 
-# Scalar Subquery Expressions
+## Scalar Subquery Expressions
 
 - A **scalar subquery** expression is a subquery that returns **exactly one column value from one row**.
 - Scalar subqueries can be used in:
     - **Condition** and **expression** parts of `DECODE` and `CASE`
     - **All clauses** of a `SELECT` statement **except** `GROUP BY`
 
-# Scalar Subqueries Examples
+## Scalar Subqueries Examples
 
 Scalar Subqueries in CASE Expressions
 
@@ -304,7 +304,7 @@ ORDER BY (SELECT department_name
           WHERE e.department_id = d.department_id);
 ```
 
-# Correlated Subqueries
+## Correlated Subqueries
 
 - **Correlated subqueries** are used for **row-by-row processing**.
 - Each subquery is executed **once for every row** of the outer query.
@@ -345,7 +345,7 @@ WHERE salary >
 
 Each time a row from the outer query is processed, the inner query is evaluated.
 
-# Correlated Subquery Example
+## Correlated Subquery Example
 
 Display details of those employees who have changed jobs at least twice.
 
@@ -365,7 +365,7 @@ WHERE 2 <= (
 | 176         | Taylor    | SA_REP  |
 | 200         | Whalen    | AD_ASST |
 
-# Using the EXISTS Operator
+## Using the EXISTS Operator
 
 - The **EXISTS** operator tests for the **existence** of rows in the result set of the subquery.
 - It returns **TRUE** if the subquery returns at least one row, **FALSE** otherwise.
@@ -381,7 +381,7 @@ If a subquery row value is not found:
 - The condition is flagged **FALSE**.
 - The search **continues** in the inner query until all rows are checked or a match is found.
 
-# Find Employees Who Have at Least One Person Reporting to Them
+## Find Employees Who Have at Least One Person Reporting to Them
 
 ```sql
 SELECT employee_id, last_name, job_id, department_id
@@ -405,7 +405,7 @@ WHERE EXISTS (
 | 121         | Fripp       | ST_MAN   | 50            |
 | 122         | Kaufling    | ST_MAN   | 50            |
 
-# Find All Departments That Do Not Have Any Employees
+## Find All Departments That Do Not Have Any Employees
 
 ```sql
 SELECT department_id, department_name

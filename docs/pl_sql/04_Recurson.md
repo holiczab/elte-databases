@@ -1,4 +1,4 @@
-# Recursion in SQL and Datalog
+## Recursion in SQL and Datalog
 
 ![alt text](../assets/P11/graph.png){ width=700 }
 
@@ -20,7 +20,7 @@ INSERT INTO flight VALUES('Lufthansa', 'Chicago', 'Denver', 2000);
 --> orig = 'Chicago' and dest = 'Denver';
 ```
 
-# Flight Table:
+## Flight Table:
 
 | Airline   | Origin        | Destination | Cost  |
 |-----------|---------------|-------------|-------|
@@ -33,7 +33,7 @@ INSERT INTO flight VALUES('Lufthansa', 'Chicago', 'Denver', 2000);
 | Lufthansa | Chicago       | New York    | 3000  |
 | Lufthansa | Chicago       | Denver      | 2000  |
 
-# DATALOG programs
+## DATALOG programs
 
 Datalog is a logical query language (Data Logic). See textbook (Ullman ch. 5.3, 5.4 and 10.2)
 
@@ -41,7 +41,7 @@ Let's see relation Reaches(x,y) which answers the following query.
 
 For what pairs of cities (x, y) is it possible to get from city x to city y by taking one or more flights?
 
-# A recursive DATALOG program for the REACHES table:
+## A recursive DATALOG program for the REACHES table:
 
 Reaches(X,Y)  <--  Flight(_,X,Y,_)
 
@@ -162,7 +162,7 @@ Dallas Chicago     Dallas.Chicago.Denver.Chicago   Y
 ...
 </pre>
 
-# Another recursion in SQL  (START WITH, CONNECT BY)
+## Another recursion in SQL  (START WITH, CONNECT BY)
 
 ```sql
 SELECT ... FROM ... WHERE ...
@@ -181,7 +181,7 @@ In CONNECT BY we have to use the PRIOR keyword to distinguish the column of a pa
 - START WITH -> finds root node (or root nodes)
 - CONNECT BY -> relationship between parent and child rows (we should use PRIOR for parent rows)
 
-# Steps of evaluation in recursive queries
+## Steps of evaluation in recursive queries
 
 1. START WITH selects root nodes (rows)
 2. CONNECT BY finds children of roots
@@ -197,11 +197,11 @@ CONNECT BY PRIOR empno = mgr AND sal > comm
 
 empno -> parent node or record (see PRIOR), other columns -> child node (record)
 
-# PRIOR is a unary operator
+## PRIOR is a unary operator
 
 We must use PRIOR in CONNECT BY clause at least once, otherwise we cannot express the parent-child relationship.
 
-# LEVEL pszeudo column
+## LEVEL pszeudo column
 
 It returns 1 for root nodes, 2 for their children, etc.
 
@@ -226,7 +226,7 @@ KING 7839 PRESIDENT 1
   BLAKE 7698 7839 MANAGER 2
 </pre>
 
-# Ordering siblings
+## Ordering siblings
 
 ORDER BY  -> SIBLINGS [NULLS FIRST | NULLS LAST] 
 
@@ -344,7 +344,7 @@ ABEL ADAM 280000
     PAL JANOS 133000
 </pre>
 
-# CONNECT_BY_ROOT operator
+## CONNECT_BY_ROOT operator
 
 At any level we can refer to a column of the root node with this operator.
 
@@ -371,7 +371,7 @@ ADAM NO Budapest Budapest
     BALAZS KAIN Budapest Budapest
 </pre>
 
-# SYS_CONNECT_BY_PATH function: SYS_CONNECT_BY_PATH(column, char)
+## SYS_CONNECT_BY_PATH function: SYS_CONNECT_BY_PATH(column, char)
 
 SYS_CONNECT_BY_PATH concatenates the given column of the nodes from root to actual node.
 
@@ -480,7 +480,7 @@ San Francisco Denver 0
         Dallas New York 2
 </pre>
 
-# Other pszeudo columns
+## Other pszeudo columns
 
 - CONNECT_BY_ISCYCLE: returns 1 if actual row has a child that is an ancestor of it too. (So, it would mean a cycle.)
 - CONNECT_BY_ISLEAF:  returns 1 if actual row has no child. (or has only child that was an ancestor)
@@ -578,7 +578,7 @@ San Francisco Denver
 San Francisco New York
 </pre>
 
-# Produce a relation Factorial(n, val) where val = n!
+## Produce a relation Factorial(n, val) where val = n!
 
 Factor(X, Y) <-- X=0 AND Y=1
 

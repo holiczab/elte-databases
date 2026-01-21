@@ -1,10 +1,10 @@
-# What Are Group Functions?
+## What Are Group Functions?
 
 Group functions operate on sets of rows to give one result per group.
 
 ![alt text](../assets/P3/group.png){ width=700 }
 
-# Types of Group Functions
+## Types of Group Functions
 
 - AVG
 - COUNT
@@ -14,7 +14,7 @@ Group functions operate on sets of rows to give one result per group.
 - SUM
 - VARIANCE
 
-# Group Functions: Syntax
+## Group Functions: Syntax
 
 ```sql
 SELECT     [column,] group_function(column), ...
@@ -24,7 +24,7 @@ FROM       table
 [ORDER BY  column];
 ```
 
-# Using the AVG and SUM Functions
+## Using the AVG and SUM Functions
 
 ```sql
 SELECT AVG(salary), MAX(salary),
@@ -37,7 +37,7 @@ WHERE job_id LIKE '%REP%';
 |---------------------|-------------|-------------|-------------|
 | 8272.727272727272727 | 11500       | 6000        | 273000      |
 
-# Using the MIN and MAX Functions
+## Using the MIN and MAX Functions
 
 ```sql
 SELECT MIN(hire_date), MAX(hire_date)
@@ -48,9 +48,9 @@ FROM nikovits.employees;
 |---------------|----------------|
 | 17/06/87      | 21/04/00       |
 
-# Using the COUNT Function
+## Using the COUNT Function
 
-# COUNT(*) returns the number of rows in a table:
+## COUNT(*) returns the number of rows in a table:
 
 ```sql
 SELECT COUNT(*)
@@ -62,7 +62,7 @@ WHERE department_id = 50;
 |----------|
 | 45       |
 
-# COUNT(expr) returns the number of rows with non-null values for expr:
+## COUNT(expr) returns the number of rows with non-null values for expr:
 
 ```sql
 SELECT COUNT(commission_pct)
@@ -74,7 +74,7 @@ WHERE department_id = 80
 |-----------------------|
 | 34                    |
 
-# Using the DISTINCT Keyword
+## Using the DISTINCT Keyword
 
 - COUNT(DISTINCT expr) returns the number of distinct non-null values of the expr.
 - To display the number of distinct department values in the nikovits.employees table:
@@ -88,9 +88,9 @@ FROM nikovits.employees;
 |-------------------------------|
 | 11                            |
 
-# Group Functions and Null Values
+## Group Functions and Null Values
 
-# Group functions ignore null values in the column:
+## Group functions ignore null values in the column:
 
 ```sql
 SELECT AVG(commission_pct)
@@ -101,7 +101,7 @@ FROM nikovits.employees;
 |----------------------|
 | .2228571428571428571 |
 
-# The NVL function forces group functions to include null values:
+## The NVL function forces group functions to include null values:
 
 ```sql
 SELECT AVG(NVL(commission_pct, 0))

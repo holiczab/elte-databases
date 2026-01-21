@@ -1,4 +1,4 @@
-# Nesting Functions
+## Nesting Functions
 
 - Single-row functions can be nested to any level.  
 - Nested functions are evaluated from the **deepest level** to the **least deep level** (inside-out).
@@ -20,7 +20,7 @@ WHERE department_id = 60;
 | Pataballa  | PATABALL_US                                |
 | Lorentz    | LORENTZ_US                                 |
 
-# General Functions
+## General Functions
 
 The following functions work with any data type and pertain to using nulls:
 
@@ -29,7 +29,7 @@ The following functions work with any data type and pertain to using nulls:
     - NULLIF (expr1, expr2)
     - COALESCE (expr1, expr2, ..., exprn)
 
-# NVL Function
+## NVL Function
 
 Converts a null value to an actual value:
 
@@ -40,19 +40,19 @@ Converts a null value to an actual value:
   - NVL(hire_date, '01-JAN-97')
   - NVL(job_id, 'No Job Yet')
 
-# Using the NVL Function
+## Using the NVL Function
 
 ![alt text](../assets/P3/nvl.png){ width=700 }
 
-# Using the NVL2 Function
+## Using the NVL2 Function
 
 ![alt text](../assets/P3/nvl2.png){ width=700 }
 
-# Using the NULLIF Function
+## Using the NULLIF Function
 
 ![alt text](../assets/P3/nullif.png){ width=700 }
 
-# Using the COALESCE Function
+## Using the COALESCE Function
 
 - The advantage of the **COALESCE** function over the NVL function is that the COALESCE function can take multiple alternate values.
 - If the first expression is not null, the COALESCE function returns that expression; otherwise, it does a COALESCE of the remaining expressions.

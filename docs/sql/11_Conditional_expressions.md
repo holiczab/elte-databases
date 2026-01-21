@@ -1,11 +1,11 @@
-# Conditional Expressions
+## Conditional Expressions
 
 - Provide the use of IF-THEN-ELSE logic within a SQL statement
 - Use two methods:
     - CASE expression
     - DECODE function
 
-# CASE Expression
+## CASE Expression
 
 Facilitates conditional inquiries by doing the work of an IF-THEN-ELSE statement:
 
@@ -17,7 +17,7 @@ CASE expr WHEN comparison_expr1 THEN return_expr1
 END
 ```
 
-# IF THEN ELSE statement:
+## IF THEN ELSE statement:
 
 ```sql
 SELECT last_name, job_id, salary,
@@ -38,7 +38,7 @@ FROM nikovits.employees;
 | Austin      | IT_PROG | 4800   | 5280           |
 | Pataballa   | IT_PROG | 4800   | 5280           |
 
-# DECODE Function in Oracle SQL
+## DECODE Function in Oracle SQL
 
 Facilitates conditional inquiries by doing the work of a CASE expression or an IF-THEN-ELSE statement:
 
@@ -68,7 +68,7 @@ FROM nikovits.employees;
 | Austin      | IT_PROG | 4800   | 5280           |
 | Pataballa   | IT_PROG | 4800   | 5280           |
 
-# Display the applicable tax rate for each employee in department 80:
+## Display the applicable tax rate for each employee in department 80:
 
 ```sql
 SELECT last_name, salary,

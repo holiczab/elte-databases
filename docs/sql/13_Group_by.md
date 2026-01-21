@@ -1,8 +1,8 @@
-# Creating Groups of Data
+## Creating Groups of Data
 
 ![alt text](../assets/P4/group.png){ width=700 }
 
-# Creating Groups of Data: GROUP BY Clause Syntax
+## Creating Groups of Data: GROUP BY Clause Syntax
 
 ```sql
 SELECT     column, group_function(column)
@@ -14,7 +14,7 @@ FROM       table
 
 You can divide rows in a table into smaller groups by using the GROUP BY clause.
 
-# Using the GROUP BY Clause
+## Using the GROUP BY Clause
 
 All columns in the SELECT list that are not in group functions must be in the GROUP BY clause.
 
@@ -39,7 +39,7 @@ GROUP BY department_id;
 | 60                   | 5760                 |
 | 10                   | 4400                 |
 
-# Using the GROUP BY Clause
+## Using the GROUP BY Clause
 
 The GROUP BY column does not have to be in the SELECT list.
 
@@ -64,11 +64,11 @@ GROUP BY department_id;
 | 5760                 |
 | 4400                 |
 
-# Grouping by More Than One Column
+## Grouping by More Than One Column
 
 ![alt text](../assets/P4/more.png){ width=700 }
 
-# Using the GROUP BY Clause on Multiple Columns
+## Using the GROUP BY Clause on Multiple Columns
 
 ```sql
 SELECT department_id dept_id, job_id, SUM(salary)
@@ -99,7 +99,7 @@ GROUP BY department_id, job_id ;
 | 20                   | MK_REP               | 6000                 |
 | 40                   | HR_REP               | 6500                 |
 
-# Illegal Queries Using Group Functions
+## Illegal Queries Using Group Functions
 
 Any column or expression in the SELECT list that is not an aggregate function **must** be in the GROUP BY clause:
 
@@ -112,7 +112,7 @@ FROM     employees;
 
 Column missing in the GROUP BY clause
 
-# Illegal Queries Using Group Functions
+## Illegal Queries Using Group Functions
 
 - You cannot use the **WHERE** clause to restrict groups.
 - You use the **HAVING** clause to restrict groups.
@@ -129,11 +129,11 @@ GROUP BY department_id;
 
 Cannot use the WHERE clause to restrict groups
 
-# Restricting Group Functions
+## Restricting Group Functions
 
 ![alt text](../assets/P4/restriction.png){ width=700 }
 
-# Restricting Group Results with the HAVING Clause
+## Restricting Group Results with the HAVING Clause
 
 - When you use the HAVING clause, the Oracle server restricts groups as follows:
   1. Rows are grouped.
@@ -149,7 +149,7 @@ FROM       table
 [ORDER BY  column];
 ```
 
-# Using the HAVING Clause
+## Using the HAVING Clause
 
 ```sql
 SELECT department_id, MAX(salary)
@@ -188,7 +188,7 @@ ORDER BY SUM(salary);
 | SA_MAN               | 61000                |
 | SH_CLERK             | 64300                |
 
-# Nesting Group Functions
+## Nesting Group Functions
 
 - Display the maximum average salary:
 - Group functions can be nested to a depth of two.

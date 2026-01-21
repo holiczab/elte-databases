@@ -1,4 +1,4 @@
-# Cursor
+## Cursor
 
 Every SQL statement executed by the Oracle Server has an individual cursor associated with it:
 
@@ -305,7 +305,7 @@ Results:
 BLAKE
 </pre>
 
-# Collection
+## Collection
 
 - A collection is an ordered group of elements having the same data type.
 - Each element is identified by a unique subscript that represents its position in the collection.
@@ -319,7 +319,7 @@ PL/SQL has three collection types:
 2. VARRAY (variable-size array), 
 3. NESTED TABLE
 
-# Collection methods
+## Collection methods
 
 A collection method is a PL/SQL subprogram: either a function that returns information about a collection, or a procedure that operates on a collection.
 
