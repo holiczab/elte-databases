@@ -2,11 +2,11 @@
 
 ![alt text](../assets/P3/charf.png){ width=700 }
 
-## Case-Manipulation Functions in SQL
+# Case-Manipulation Functions in SQL
 
 These functions convert the case for character strings.
 
-### Common Case-Manipulation Functions
+## Common Case-Manipulation Functions
 
 | Function                       | Result              | Description                                      |
 |--------------------------------|---------------------|--------------------------------------------------|
@@ -14,7 +14,7 @@ These functions convert the case for character strings.
 | UPPER('SQL Course')            | SQL COURSE          | Converts all characters to uppercase             |
 | INITCAP('SQL Course')          | Sql Course          | Converts the first letter of each word to uppercase and the rest to lowercase |
 
-### Using Case-Manipulation Functions
+# Using Case-Manipulation Functions
 
 Display the employee number, name, and department number for employee Higgins:
 
@@ -37,15 +37,15 @@ WHERE LOWER(last_name) = 'higgins';
 |-------------|-----------|---------------|
 | 205         | Higgins   | 110           |
 
-## Character-Manipulation Functions in SQL
+# Character-Manipulation Functions in SQL
 
 These functions manipulate character strings.
 
-### Common Character-Manipulation Functions
+## Common Character-Manipulation Functions
 
 | Function                                      | Result                  | Description                                                                 |
 |-----------------------------------------------|-------------------------|-----------------------------------------------------------------------------|
-| CONCAT('Hello', 'World')                      | HelloWorld              | Concatenates two strings (alternative: use `\|\|` operator)                   |
+| CONCAT('Hello', 'World')                      | HelloWorld              | Concatenates two strings (alternative: use `||` operator)                   |
 | SUBSTR('HelloWorld', 1, 5)                    | Hello                   | Returns a substring starting at position 1 with length 5                    |
 | LENGTH('HelloWorld')                          | 10                      | Returns the length of the string                                            |
 | INSTR('HelloWorld', 'W')                      | 6                       | Returns the position of the first occurrence of 'W' (1-based index)         |
@@ -54,6 +54,6 @@ These functions manipulate character strings.
 | REPLACE('JACK and JUE', 'J', 'BL')            | BLACK and BLUE          | Replaces all occurrences of 'J' with 'BL'                                   |
 | TRIM('H' FROM 'HelloWorld')                   | elloWorld               | Removes all leading occurrences of 'H' from the string                       |
 
-### Using the Character-Manipulation Functions
+# Using the Character-Manipulation Functions
 
 ![alt text](../assets/P3/usingchar.png){ width=700 }

@@ -1,189 +1,8 @@
-# Subqueries
-
-## Introduction to Subqueries
-
-- A **subquery** is a query that is nested inside another query.
-- The outer query is called the **main query**.
-- The subquery can return values to the main query to help it execute.
-
-## Guidelines for Using Subqueries
-
-- Enclose subqueries in parentheses.
-- Place subqueries on the right side of the comparison condition.
-- The ORDER BY clause in the subquery is not needed unless you are performing Top-N analysis.
-- Use single-row operators with single-row subqueries, and use multiple-row operators with multiple-row subqueries.
-
-## Types of Subqueries
-
-![alt text](../assets/P4/typessub.png){ width=700 }
-
-### Single-Row Subqueries
-
-- Return **only one row**
-- Use single-row comparison operators
-
-| Operator | Meaning                  |
-|----------|--------------------------|
-| =        | Equal to                 |
-| >        | Greater than             |
-| >=       | Greater than or equal to |
-| <        | Less than                |
-| <=       | Less than or equal to    |
-| <>       | Not equal to             |
-
-#### Executing Single-Row Subqueries
-
-```sql
-SELECT last_name, job_id, salary
-FROM nikovits.employees
-WHERE job_id =
-(SELECT job_id
-FROM nikovits.employees
-WHERE employee_id = 141)
-AND salary >
-(SELECT salary
-FROM nikovits.employees
-WHERE employee_id = 143);
-```
-
-| LAST_NAME            | JOB_ID               | SALARY               |
-|----------------------|----------------------|----------------------|
-| Nayer                | ST_CLERK             | 3200                 |
-| Mikkilineni          | ST_CLERK             | 2700                 |
-| Bissot               | ST_CLERK             | 3300                 |
-| Atkinson             | ST_CLERK             | 2800                 |
-| Mallin               | ST_CLERK             | 3300                 |
-| Rogers               | ST_CLERK             | 2900                 |
-| Ladwig               | ST_CLERK             | 3600                 |
-| Stiles               | ST_CLERK             | 3200                 |
-| Seo                  | ST_CLERK             | 2700                 |
-
-### Using Group Functions in a Subquery
-
-```sql
-SELECT last_name, job_id, salary
-FROM nikovits.employees
-WHERE salary =
-(SELECT MIN(salary)
-FROM nikovits.employees);
-```
-
-| LAST_NAME            | JOB_ID               | SALARY               |
-|----------------------|----------------------|----------------------|
-| Olson                | ST_CLERK             | 2100                 |
-
-### The HAVING Clause with Subqueries
-
-- The Oracle server executes subqueries first.
-- The Oracle server returns results into the HAVING clause of the main query.
-
-```sql
-SELECT   department_id, MIN(salary)
-FROM     employees
-GROUP BY department_id
-HAVING   MIN(salary) > 
-         (SELECT MIN(salary)
-          FROM   employees
-          WHERE  department_id = 50);
-```
-
-### What Is Wrong with This Statement?
-
-```sql
-SELECT employee_id, last_name
-FROM   employees
-WHERE  salary =
-       (SELECT   MIN(salary)
-        FROM     employees
-        GROUP BY department_id);
-``` 
-
-![alt text](../assets/P4/error3.png){ width=700 }
-
-Single-row operator with multiple-row subquery
-
-### Will This Statement Return Rows?
-
-```sql
-SELECT last_name, job_id
-FROM   employees
-WHERE  job_id =
-       (SELECT job_id
-        FROM   employees
-        WHERE  last_name = 'Haas');
-```
-
-![alt text](../assets/P4/error4.png){ width=700 }
-
-Subquery returns no values.
-
-### Multiple-Row Subqueries
-
-- Return **more than one row**
-- Use multiple-row comparison operators
-
-| Operator | Meaning                                      |
-|----------|----------------------------------------------|
-| IN       | Equal to any member in the list              |
-| ANY      | Compare value to each value returned by the subquery |
-| ALL      | Compare value to every value returned by the subquery |
-
-#### Using the ANY Operator in Multiple-Row Subqueries
-
-```sql
-SELECT employee_id, last_name, job_id, salary
-FROM nikovits.employees
-WHERE salary < ANY
-(SELECT salary
-FROM nikovits.employees
-WHERE job_id = 'IT_PROG')
-AND job_id <> 'IT_PROG';
-```
-
-| EMPLOYEE_ID          | LAST_NAME            | JOB_ID               | SALARY               |
-|----------------------|----------------------|----------------------|----------------------|
-| 132                  | Olson                | ST_CLERK             | 2100                 |
-| 136                  | Philtanker           | ST_CLERK             | 2200                 |
-| 128                  | Markle               | ST_CLERK             | 2200                 |
-| 135                  | Gee                  | ST_CLERK             | 2400                 |
-| 127                  | Landry               | ST_CLERK             | 2400                 |
-| 191                  | Perkins              | SH_CLERK             | 2500                 |
-| 182                  | Sullivan             | SH_CLERK             | 2500                 |
-| 144                  | Vargas               | ST_CLERK             | 2500                 |
-| 140                  | Patel                | ST_CLERK             | 2500                 |
-
-#### Using the ALL Operator in Multiple-Row Subqueries
-
-```sql
-SELECT employee_id, last_name, job_id, salary
-FROM nikovits.employees
-WHERE salary < ALL
-(SELECT salary
-FROM nikovits.employees
-WHERE job_id = 'IT_PROG')
-AND job_id <> 'IT_PROG';
-```
-
-| EMPLOYEE_ID          | LAST_NAME            | JOB_ID               | SALARY               |
-|----------------------|----------------------|----------------------|----------------------|
-| 185                  | Bull                 | SH_CLERK             | 4100                 |
-| 192                  | Bell                 | SH_CLERK             | 4000                 |
-| 193                  | Everett              | SH_CLERK             | 3900                 |
-| 188                  | Chung                | SH_CLERK             | 3800                 |
-| 137                  | Ladwig               | ST_CLERK             | 3600                 |
-| 189                  | Dilly                | SH_CLERK             | 3600                 |
-| 141                  | Rajs                 | ST_CLERK             | 3500                 |
-| 186                  | Dellinger            | SH_CLERK             | 3400                 |
-| 133                  | Mallin               | ST_CLERK             | 3300                 |
-| 129                  | Bissot               | ST_CLERK             | 3300                 |
-| 180                  | Taylor               | SH_CLERK             | 3200                 |
-| 138                  | Stiles               | ST_CLERK             | 3200                 |
-
-## Using a Subquery to Solve a Problem
+# Using a Subquery to Solve a Problem
 
 ![alt text](../assets/P4/sub.png){ width=700 }
 
-### Subquery Syntax
+# Subquery Syntax
 
 ```sql
 SELECT  select_list
@@ -218,7 +37,274 @@ WHERE last_name = 'Abel');
 | Hartstein            |
 | Higgins              |
 
-## Correlated Subqueries
+# Guidelines for Using Subqueries
+
+- Enclose subqueries in parentheses.
+- Place subqueries on the right side of the comparison condition.
+- The ORDER BY clause in the subquery is not needed unless you are performing Top-N analysis.
+- Use single-row operators with single-row subqueries, and use multiple-row operators with multiple-row subqueries.
+
+# Types of Subqueries
+
+![alt text](../assets/P4/typessub.png){ width=700 }
+
+# Single-Row Subqueries
+
+- Return **only one row**
+- Use single-row comparison operators
+
+| Operator | Meaning                  |
+|----------|--------------------------|
+| =        | Equal to                 |
+| >        | Greater than             |
+| >=       | Greater than or equal to |
+| <        | Less than                |
+| <=       | Less than or equal to    |
+| <>       | Not equal to             |
+
+# Executing Single-Row Subqueries
+
+```sql
+SELECT last_name, job_id, salary
+FROM nikovits.employees
+WHERE job_id =
+(SELECT job_id
+FROM nikovits.employees
+WHERE employee_id = 141)
+AND salary >
+(SELECT salary
+FROM nikovits.employees
+WHERE employee_id = 143);
+```
+
+| LAST_NAME            | JOB_ID               | SALARY               |
+|----------------------|----------------------|----------------------|
+| Nayer                | ST_CLERK             | 3200                 |
+| Mikkilineni          | ST_CLERK             | 2700                 |
+| Bissot               | ST_CLERK             | 3300                 |
+| Atkinson             | ST_CLERK             | 2800                 |
+| Mallin               | ST_CLERK             | 3300                 |
+| Rogers               | ST_CLERK             | 2900                 |
+| Ladwig               | ST_CLERK             | 3600                 |
+| Stiles               | ST_CLERK             | 3200                 |
+| Seo                  | ST_CLERK             | 2700                 |
+
+# Using Group Functions in a Subquery
+
+```sql
+SELECT last_name, job_id, salary
+FROM nikovits.employees
+WHERE salary =
+(SELECT MIN(salary)
+FROM nikovits.employees);
+```
+
+| LAST_NAME            | JOB_ID               | SALARY               |
+|----------------------|----------------------|----------------------|
+| Olson                | ST_CLERK             | 2100                 |
+
+# The HAVING Clause with Subqueries
+
+- The Oracle server executes subqueries first.
+- The Oracle server returns results into the HAVING clause of the main query.
+
+```sql
+SELECT   department_id, MIN(salary)
+FROM     employees
+GROUP BY department_id
+HAVING   MIN(salary) > 
+         (SELECT MIN(salary)
+          FROM   employees
+          WHERE  department_id = 50);
+```
+
+# What Is Wrong with This Statement?
+
+```sql
+SELECT employee_id, last_name
+FROM   employees
+WHERE  salary =
+       (SELECT   MIN(salary)
+        FROM     employees
+        GROUP BY department_id);
+``` 
+
+![alt text](../assets/P4/error3.png){ width=700 }
+
+Single-row operator with multiple-row subquery
+
+# Will This Statement Return Rows?
+
+```sql
+SELECT last_name, job_id
+FROM   employees
+WHERE  job_id =
+       (SELECT job_id
+        FROM   employees
+        WHERE  last_name = 'Haas');
+```
+
+![alt text](../assets/P4/error4.png){ width=700 }
+
+Subquery returns no values.
+
+# Multiple-Row Subqueries
+
+- Return **more than one row**
+- Use multiple-row comparison operators
+
+| Operator | Meaning                                      |
+|----------|----------------------------------------------|
+| IN       | Equal to any member in the list              |
+| ANY      | Compare value to each value returned by the subquery |
+| ALL      | Compare value to every value returned by the subquery |
+
+# Using the ANY Operator in Multiple-Row Subqueries
+
+```sql
+SELECT employee_id, last_name, job_id, salary
+FROM nikovits.employees
+WHERE salary < ANY
+(SELECT salary
+FROM nikovits.employees
+WHERE job_id = 'IT_PROG')
+AND job_id <> 'IT_PROG';
+```
+
+| EMPLOYEE_ID          | LAST_NAME            | JOB_ID               | SALARY               |
+|----------------------|----------------------|----------------------|----------------------|
+| 132                  | Olson                | ST_CLERK             | 2100                 |
+| 136                  | Philtanker           | ST_CLERK             | 2200                 |
+| 128                  | Markle               | ST_CLERK             | 2200                 |
+| 135                  | Gee                  | ST_CLERK             | 2400                 |
+| 127                  | Landry               | ST_CLERK             | 2400                 |
+| 191                  | Perkins              | SH_CLERK             | 2500                 |
+| 182                  | Sullivan             | SH_CLERK             | 2500                 |
+| 144                  | Vargas               | ST_CLERK             | 2500                 |
+| 140                  | Patel                | ST_CLERK             | 2500                 |
+
+# Using the ALL Operator in Multiple-Row Subqueries
+
+```sql
+SELECT employee_id, last_name, job_id, salary
+FROM nikovits.employees
+WHERE salary < ALL
+(SELECT salary
+FROM nikovits.employees
+WHERE job_id = 'IT_PROG')
+AND job_id <> 'IT_PROG';
+```
+
+| EMPLOYEE_ID          | LAST_NAME            | JOB_ID               | SALARY               |
+|----------------------|----------------------|----------------------|----------------------|
+| 185                  | Bull                 | SH_CLERK             | 4100                 |
+| 192                  | Bell                 | SH_CLERK             | 4000                 |
+| 193                  | Everett              | SH_CLERK             | 3900                 |
+| 188                  | Chung                | SH_CLERK             | 3800                 |
+| 137                  | Ladwig               | ST_CLERK             | 3600                 |
+| 189                  | Dilly                | SH_CLERK             | 3600                 |
+| 141                  | Rajs                 | ST_CLERK             | 3500                 |
+| 186                  | Dellinger            | SH_CLERK             | 3400                 |
+| 133                  | Mallin               | ST_CLERK             | 3300                 |
+| 129                  | Bissot               | ST_CLERK             | 3300                 |
+| 180                  | Taylor               | SH_CLERK             | 3200                 |
+| 138                  | Stiles               | ST_CLERK             | 3200                 |
+
+# Null Values in a Subquery
+
+```sql
+SELECT  emp.last_name
+FROM    employees emp
+WHERE   emp.employee_id NOT IN
+        (SELECT mgr.manager_id
+         FROM   employees mgr);
+```
+
+no rows selected
+
+x NOT IN (A, B, NULL) → Unknown
+
+# Multiple-Column Subqueries
+
+```sql
+Main query
+WHERE (MANAGER_ID, DEPARTMENT_ID) IN
+          ┌─────────────────────┐
+          │     Subquery        │
+          │ 100     90          │
+          │ 102     60          │
+          │ 124     50          │
+          └─────────────────────┘
+```
+
+Each row of the main query is compared to values from a multiple-row and multiple-column subquery.
+
+# Pairwise Comparison Subquery
+
+Display the details of the employees who are managed by the same manager **and** work in the same department as the employees with `EMPLOYEE_ID` 199 or 174.
+
+```sql
+SELECT employee_id, manager_id, department_id
+FROM employees
+WHERE (manager_id, department_id) IN
+    (SELECT manager_id, department_id
+     FROM employees
+     WHERE employee_id IN (199, 174))
+AND employee_id NOT IN (199, 174);
+```
+
+# Nonpairwise Comparison Subquery
+
+Display the details of the employees who are managed by the same manager as the employees with `EMPLOYEE_ID` 174 or 199 **and** work in the same department as the employees with `EMPLOYEE_ID` 174 or 199.
+
+```sql
+SELECT employee_id, manager_id, department_id
+FROM employees
+WHERE manager_id IN
+    (SELECT manager_id
+     FROM employees
+     WHERE employee_id IN (174, 199))
+AND department_id IN
+    (SELECT department_id
+     FROM employees
+     WHERE employee_id IN (174, 199))
+AND employee_id NOT IN (174, 199);
+```
+
+# Scalar Subquery Expressions
+
+- A **scalar subquery** expression is a subquery that returns **exactly one column value from one row**.
+- Scalar subqueries can be used in:
+    - **Condition** and **expression** parts of `DECODE` and `CASE`
+    - **All clauses** of a `SELECT` statement **except** `GROUP BY`
+
+# Scalar Subqueries Examples
+
+Scalar Subqueries in CASE Expressions
+
+```sql
+SELECT employee_id, last_name,
+       (CASE 
+            WHEN department_id = 
+                    (SELECT department_id
+                      FROM departments
+                      WHERE location_id = 1800)
+            THEN 'Canada' ELSE 'USA'
+        END) location
+FROM employees;
+```
+
+Scalar subqueries in ORDER BY clause
+
+```sql
+SELECT employee_id, last_name
+FROM employees e
+ORDER BY (SELECT department_name
+          FROM departments d
+          WHERE e.department_id = d.department_id);
+```
+
+# Correlated Subqueries
 
 - **Correlated subqueries** are used for **row-by-row processing**.
 - Each subquery is executed **once for every row** of the outer query.
@@ -246,8 +332,6 @@ WHERE column1 operator
      WHERE expr1 = outer.expr2);
 ```
 
-### Finding Employees with Above-Average Salary
-
 Find all employees who earn more than the average salary in their department.
 
 ```sql
@@ -261,7 +345,7 @@ WHERE salary >
 
 Each time a row from the outer query is processed, the inner query is evaluated.
 
-### Correlated Subquery Example
+# Correlated Subquery Example
 
 Display details of those employees who have changed jobs at least twice.
 
@@ -281,7 +365,7 @@ WHERE 2 <= (
 | 176         | Taylor    | SA_REP  |
 | 200         | Whalen    | AD_ASST |
 
-## Using the EXISTS Operator
+# Using the EXISTS Operator
 
 - The **EXISTS** operator tests for the **existence** of rows in the result set of the subquery.
 - It returns **TRUE** if the subquery returns at least one row, **FALSE** otherwise.
@@ -341,47 +425,3 @@ WHERE NOT EXISTS (
 | 150           | Shareholder Services  |
 | 160           | Benefits              |
 | 170           | Manufacturing         |
-
-# The WITH Clause
-
-- Using the **WITH** clause, you can use the same query block in a `SELECT` statement when it occurs more than once within a complex query.
-- The **WITH** clause retrieves the results of a query block and stores it in the user's **temporary tablespace**.
-- The **WITH** clause **improves performance** by avoiding repeated execution of the same subquery.
-
-# WITH Clause Example
-
-Using the `WITH` clause, write a query to display the department name and total salaries for those departments whose total salary is greater than the average salary across departments.
-
-```sql
-WITH 
-dept_costs AS (
-    SELECT d.department_name, SUM(e.salary) AS dept_total
-    FROM employees e
-    JOIN departments d ON e.department_id = d.department_id
-    GROUP BY d.department_name
-),
-avg_cost AS (
-    SELECT SUM(dept_total)/COUNT(*) AS dept_avg
-    FROM dept_costs
-)
-SELECT *
-FROM dept_costs
-WHERE dept_total > 
-    (SELECT dept_avg
-     FROM avg_cost)
-ORDER BY department_name;
-```
-
-## Null Values in a Subquery
-
-```sql
-SELECT  emp.last_name
-FROM    employees emp
-WHERE   emp.employee_id NOT IN
-        (SELECT mgr.manager_id
-         FROM   employees mgr);
-```
-
-no rows selected
-
-x NOT IN (A, B, NULL) → Unknown

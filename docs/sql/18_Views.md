@@ -1,6 +1,4 @@
-# Views
-
-## What is a VIEW?
+# What is a VIEW?
 
 ![alt text](../assets/P5/view.png){ width=700 }
 
@@ -12,11 +10,11 @@ A view contains no data of its own but is like a **window** through which data f
 
 The tables on which a view is based are called **base tables**. The view is stored as a SELECT statement in the data dictionary.
 
-## Advantages of Views
+# Advantages of Views
 
 ![alt text](../assets/P5/adviews.png){ width=700 }
 
-## Simple Views and Complex Views
+# Simple Views and Complex Views
 
 | Feature                  | Simple Views          | Complex Views       |
 |--------------------------|-----------------------|---------------------|
@@ -25,7 +23,7 @@ The tables on which a view is based are called **base tables**. The view is stor
 | Contain groups of data   | No                    | Yes                 |
 | DML operations through a view | Yes              | Not always          |
 
-## Creating a View
+# Creating a View
 
 - You embed a subquery in the CREATE VIEW statement:
 
@@ -56,14 +54,14 @@ Describe the structure of the view by using the SQL*Plus DESCRIBE command:
 DESCRIBE empvu80
 ```
 
-### Retrieving Data from a View
+Retrieving Data from a View
 
 ```sql
 SELECT *
 FROM   salvu50;
 ```
 
-## Modifying a View
+# Modifying a View
 
 - Modify the EMPVU80 view by using a CREATE OR REPLACE VIEW clause. Add an alias for each column name:
 
@@ -79,7 +77,7 @@ View created.
 
 Column aliases in the CREATE OR REPLACE VIEW clause are listed in the same order as the columns in the subquery.
 
-## Creating a Complex View
+# Creating a Complex View
 
 - Create a complex view that contains group functions to display values from two tables:
 
@@ -93,7 +91,7 @@ AS SELECT   d.department_name, MIN(e.salary),
    GROUP BY d.department_name;
 ```
 
-## Rules for Performing DML Operations on a View
+# Rules for Performing DML Operations on a View
 
 - You can usually perform DML operations on simple views.
 - You cannot remove a row if the view contains the following:
@@ -115,7 +113,7 @@ AS SELECT   d.department_name, MIN(e.salary),
     - Columns defined by expressions
     - NOT NULL columns in the base tables that are not selected by the view
 
-## Using the WITH CHECK OPTION Clause
+# Using the WITH CHECK OPTION Clause
 
 - You can ensure that DML operations performed on the view stay in the domain of the view by using the WITH CHECK OPTION clause:
 
@@ -129,7 +127,7 @@ AS SELECT *
 
 Any attempt to change the department number for any row in the view fails because it violates the WITH CHECK OPTION constraint.
 
-## Denying DML Operations
+# Denying DML Operations
 
 - You can ensure that no DML operations occur by adding the WITH READ ONLY option to your view definition.
 - Any attempt to perform a DML operation on any row in the view results in an Oracle server error.
@@ -143,7 +141,7 @@ AS SELECT  employee_id, last_name, job_id
    WITH READ ONLY;
 ```
 
-## Removing a View
+# Removing a View
 
 - You can remove a view without losing data because a view is based on underlying tables in the database.
 

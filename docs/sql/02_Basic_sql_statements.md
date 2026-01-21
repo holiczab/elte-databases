@@ -1,10 +1,24 @@
-# Basic SELECT Statement
+# Communicating with an RDBMS Using SQL
 
-## Capabilities of SQL SELECT Statements
+![alt text](../assets/P1/comm.png){ width=700 }
+
+# SQL Statements
+
+![alt text](../assets/P1/statement_elements.png){ width=700 }
+
+# Order of Statements
+
+![alt text](../assets/P1/order.png){ width=700 }
+
+# Tables Used in the Course
+
+![alt text](../assets/P1/used_tables.png){ width=700 }
+
+# Capabilities of SQL SELECT Statements
 
 ![alt text](../assets/P1/cap.png){ width=700 }
 
-## SELECT Statement Syntax
+# Basic SELECT Statement
 
 ```sql
 SELECT * | {[DISTINCT] column|expression [alias], ...}
@@ -14,7 +28,7 @@ FROM table;
 - SELECT identifies the columns to be displayed
 - FROM identifies the table containing those columns
 
-## Selecting All Columns
+# Selecting All Columns
 
 ```sql
 SELECT * FROM nikovits.departments;
@@ -36,7 +50,7 @@ SELECT * FROM nikovits.departments;
 | 120           | Treasury             | NULL       | 1700        |
 | 130           | Corporate Tax        | NULL       | 1700        |
 
-## Selecting Specific Columns
+# Selecting Specific Columns
 
 ```sql
 SELECT department_id, location_id
@@ -62,7 +76,7 @@ FROM nikovits.departments;
 | 150           | 1700        |
 | 160           | 1700        |
 
-## Writing SQL Statements
+# Writing SQL Statements
 
 - SQL statements are not case-sensitive.
 - SQL statements can be on one or more lines.
@@ -71,7 +85,7 @@ FROM nikovits.departments;
 - Indents are used to enhance readability.
 - In SQL*Plus, SQL statements can optionally beterminated by a semicolon (;). Semicolons arerequired if you execute multiple SQLstatements.
 
-## Arithmetic Expressions
+# Arithmetic Expressions
 
 | Operator | Description |
 |----------|-------------|
@@ -80,27 +94,28 @@ FROM nikovits.departments;
 | *        | Multiply   |
 | /        | Divide     |
 
-## Using Arithmetic Operators
+# Using Arithmetic Operators
 
 ```sql
 SELECT last_name, salary, salary + 300
 FROM nikovits.employees;
 ```
 
-| LAST_NAME    | SALARY | SALARY + 300 |
-|--------------|--------|---------------|
-| King         | 24000  | 24300         |
-| Kochhar      | 17000  | 17300         |
-| De Haan      | 17000  | 17300         |
-| Hunold       | 9000   | 9300          |
-| Ernst        | 6000   | 6300          |
-| Austin       | 4800   | 5100          |
-| Pataballa    | 4800   | 5100          |
-| Lorentz      | 4200   | 4500          |
-| Greenberg    | 12000  | 12300         |
-| Faviet       | 9000   | 9300          |
-| Chen         | 8200   | 8500          |
-| Sciarra      | 7700   | 8000          |
+| LAST_NAME    | SALARY | SALARY+300 |
+|--------------|--------|------------|
+| King         | 24000  | 24300      |
+| Kochhar      | 17000  | 17300      |
+| De Haan      | 17000  | 17300      |
+| Hunold       | 9000   | 9300       |
+| Ernst        | 6000   | 6300       |
+| Austin       | 4800   | 5100       |
+| Pataballa    | 4800   | 5100       |
+| Lorentz      | 4200   | 4500       |
+| Greenberg    | 12000  | 12300      |
+| Faviet       | 9000   | 9300       |
+| Chen         | 8200   | 8500       |
+| Sciarra      | 7700   | 8000       |
+| Urman        | 7800   | 8100       |
 
 # Operator Precedence
 

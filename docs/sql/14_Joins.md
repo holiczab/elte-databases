@@ -1,10 +1,8 @@
-# Joins
-
-## Obtaining Data from Multiple Tables
+# Obtaining Data from Multiple Tables
 
 ![alt text](../assets/P4/multiple.png){ width=700 }
 
-## Types of Joins
+# Types of Joins
 
 - Joins that are compliant with the SQL:1999 standard include the following:
     – Cross joins
@@ -13,7 +11,7 @@
     – Full (or two-sided) outer joins
     – Arbitrary join conditions for outer joins
 
-## Joining Tables Using SQL:1999 Syntax
+# Joining Tables Using SQL:1999 Syntax
 
 Use a join to query data from more than one table:
 
@@ -29,13 +27,13 @@ FROM   table1
 [CROSS JOIN table2];
 ```
 
-## Creating Natural Joins
+# Creating Natural Joins
 
 - The NATURAL JOIN clause is based on all columns in the two tables that have the same name.
 - It selects rows from the two tables that have equal values in all matched columns.
 - If the columns having the same names have different data types, an error is returned.
 
-### Retrieving Records with Natural Joins
+# Retrieving Records with Natural Joins
 
 ```sql
 SELECT department_id, department_name,
@@ -59,14 +57,14 @@ NATURAL JOIN nikovits.locations ;
 | 110                  | Accounting           | 1700                 | Seattle              |
 | 120                  | Treasury             | 1700                 | Seattle              |
 
-## Creating Joins with the USING Clause
+# Creating Joins with the USING Clause
 
 - If several columns have the same names but the data types do not match, the NATURAL JOIN clause can be modified with the USING clause to specify the columns that should be used for an equijoin.
 - Use the USING clause to match only one column when more than one column matches.
 - Do not use a table name or alias in the referenced columns.
 - The NATURAL JOIN and USING clauses are mutually exclusive.
 
-### Joining Column Names
+# Joining Column Names
 
 ![alt text](../assets/P4/join.png){ width=700 }
 
@@ -91,14 +89,16 @@ USING (department_id) ;
 | 109                  | Faviet               | 1700                 | 100                  |
 | 110                  | Chen                 | 1700                 | 100                  |
 
-### Qualifying Ambiguous Column Names
+# Qualifying Ambiguous
+
+# Column Names
 
 - Use table prefixes to qualify column names that are in multiple tables.
 - Use table prefixes to improve performance.
 - Use column aliases to distinguish columns that have identical names but reside in different tables.
 - Do not use aliases on columns that are identified in the USING clause and listed elsewhere in the SQL statement.
 
-### Using Table Aliases
+# Using Table Aliases
 
 - Use table aliases to simplify queries.
 - Use table aliases to improve performance.
@@ -110,7 +110,7 @@ FROM   employees e JOIN departments d
 USING  (department_id) ;
 ```
 
-## Creating Joins with the ON Clause
+# Creating Joins with the ON Clause
 
 - The join condition for the natural join is basically an equijoin of all columns with the same name.
 - Use the ON clause to specify arbitrary conditions or specify columns to join.
@@ -142,7 +142,7 @@ ON (e.department_id = d.department_id);
 | 113                  | Popp                 | 100                  | 100                  | 1700                 |
 | 114                  | Raphaely             | 30                   | 30                   | 1700                 |
 
-### Self-Joins Using the ON Clause
+# Self-Joins Using the ON Clause
 
 ![alt text](../assets/P4/self.png){ width=700 }
 
@@ -168,7 +168,7 @@ ON (e.manager_id = m.employee_id);
 | Cambrault            | King                 |
 | Zlotkey              | King                 |
 
-### Applying Additional Conditions to a Join
+# Applying Additional Conditions to a Join
 
 ```sql
 SELECT e.employee_id, e.last_name, e.department_id,
@@ -193,7 +193,7 @@ ON     (e.department_id = d.department_id)
 WHERE  e.manager_id = 149;
 ```
 
-### Creating Three-Way Joins with the ON Clause
+# Creating Three-Way Joins with the ON Clause
 
 ```sql
 SELECT employee_id, city, department_name
@@ -221,7 +221,7 @@ ON d.location_id = l.location_id;
 | 112                  | Seattle              | Finance              |
 | 113                  | Seattle              | Finance              |
 
-## Non-Equijoin
+# Non-Equijoin
 
 ![alt text](../assets/P4/non.png){ width=700 }
 
@@ -247,17 +247,17 @@ BETWEEN j.lowest_sal AND j.highest_sal;
 | Perkins              | 2500                 | A                    |
 | Himuro               | 2600                 | A                    |
 
-## Outer Joins
+# Outer Joins
 
 ![alt text](../assets/P4/outer.png){ width=700 }
 
-### INNER Versus OUTER Joins
+# INNER Versus OUTER Joins
 
 - In SQL:1999, the join of two tables returning only matched rows is called an **inner join**.
 - A join between two tables that returns the results of the inner join as well as the **unmatched rows** from the left (or right) tables is called a **left (or right) outer join**.
 - A join between two tables that returns the results of an inner join as well as the results of a left and right join is a **full outer join**.
 
-### LEFT OUTER JOIN
+# LEFT OUTER JOIN
 
 ```sql
 SELECT e.last_name, e.department_id, d.department_name
@@ -281,7 +281,7 @@ ON (e.department_id = d.department_id) ;
 | Fripp                | 50                   | Shipping             |
 | Kaufling             | 50                   | Shipping             |
 
-### RIGHT OUTER JOIN
+# RIGHT OUTER JOIN
 
 ```sql
 SELECT e.last_name, e.department_id, d.department_name
@@ -302,7 +302,7 @@ ON (e.department_id = d.department_id) ;
 | Greenberg            | 100                  | Finance              |
 | Faviet               | 100                  | Finance              |
 
-### FULL OUTER JOIN
+# FULL OUTER JOIN
 
 ```sql
 SELECT e.last_name, d.department_id, d.department_name
@@ -325,7 +325,7 @@ ON (e.department_id = d.department_id) ;
 | Chen                 | 100                  | Finance              |
 | Sciarra              | 100                  | Finance              |
 
-## Cartesian Products
+# Cartesian Products
 
 - A Cartesian product is formed when:
 
@@ -335,11 +335,11 @@ ON (e.department_id = d.department_id) ;
 
 - To avoid a Cartesian product, always include a valid join condition.
 
-### Generating a Cartesian Product
+# Generating a Cartesian Product
 
 ![alt text](../assets/P4/cartesian.png){ width=700 }
 
-### Creating Cross Joins
+# Creating Cross Joins
 
 - The CROSS JOIN clause produces the crossproduct of two tables.
 - This is also called a Cartesian product between the two tables.
@@ -365,6 +365,6 @@ CROSS JOIN nikovits.departments ;
 | Chen                 | Administration       |
 | Sciarra              | Administration       |
 
-## Joins Summary
+# Joins Summary
 
 ![alt text](../assets/P4/joinsummary.png){ width=700 }

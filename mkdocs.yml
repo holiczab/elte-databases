@@ -49,26 +49,30 @@ nav:
   - DB1 Practice Guide: topics.md
   - DB2 Practice Guide: none.md
 - SQL Basics:
-  - Relational Model: sql/01_Relational_Model.md
-  - SELECT Statement: sql/02_SELECT_Statement.md
-  - Set Operators: sql/03_Set_Operators.md
-  - Character Functions: sql/04_Character_Functions.md
-  - Number Functions: sql/05_Number_Functions.md
-  - Date Functions: sql/06_Date_Functions.md
-  - Conversion Functions: sql/07_Conversion_Functions.md
-  - Aggregate Functions: sql/08_Aggregate_Functions.md
-  - Subqueries: sql/09_Subqueries.md
-  - Relational Algebra: sql/10_Relational_Algebra.md
-  - Joins: sql/11_Joins.md
-  - DML: sql/12_DML.md
-  - Transactions: sql/13_Transactions.md
-  - DDL: sql/14_DDL.md
-  - Views: sql/15_Views.md
+  - Introduction: sql/01_Introduction.md
+  - Basic SQL Statements: sql/02_Basic_sql_statements.md
+  - Set Operators: sql/03_Set_operators.md
+  - Data Types: sql/04_Data_types.md
+  - SQL Functions: sql/05_Sql_functions.md
+  - Character Functions: sql/06_Character_functions.md
+  - Number Functions: sql/07_Number_functions.md
+  - Date Functions: sql/08_Date_functions.md
+  - Conversion Functions: sql/09_Conversion_functions.md
+  - Other Functions: sql/10_Other_functions.md
+  - Conditional Expressions: sql/11_Conditional_expressions.md
+  - Group Functions: sql/12_Group_functions.md
+  - Group By: sql/13_Group_by.md
+  - Joins: sql/14_Joins.md
+  - Subqueries: sql/15_Subqueries.md
+  - With: sql/16_With.md
+  - DML and DDL: sql/17_DML_DDL.md
+  - Views: sql/18_Views.md
+  - Relational Algebra: sql/19_Relational_algebra.md
 - PL/SQL Concepts:
-  - PL/SQL Basics: pl_sql/01_PL_SQL_Basics.md
-  - Cursors: pl_sql/02_Cursors.md
-  - Exception Handling: pl_sql/03_Exception_Handling.md
-  - Recursion: pl_sql/04_Recursion.md
+  - PL/SQL Basics: pl_sql/01_PL_SQL_basics.md
+  - Cursors and Collections: pl_sql/02_Cursors and collections.md
+  - Exceptions: pl_sql/03_Exceptions.md
+  - Recursion: pl_sql/04_Recurson.md
 - PL/SQL Optimization: none.md
 - Advanced PL/SQL: none.md
 

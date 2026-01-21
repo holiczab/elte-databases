@@ -1,10 +1,29 @@
-# Relational Algebra
+# Relation Algebra
 
-[RelaX Website](https://dbis-uibk.github.io/relax/)
+![alt text](../assets/P5/rel.png){ width=700 }
+
+# A relational algebra calculator - RelaX
+
+- https://dbis-uibk.github.io/relax/landing
+- An online tool designed to help users learn and practice relational algebra by executing queries and visualizing the results
+- How to create relations and insert tuples into them:
+    1. Click on 'Group Editor' tab
+    2. Copy into 'Group Editor' window your data. Find below my examples!
+    3. Click on "preview" button then double click on "use Group in editor" button
+    4. Now you can run your queries clicking on 'Relational Algebra' or 'SQL' tab.
+- This implementation allows only sets and not multisets.
+- There are differences between Oracle and Relax SQL syntax.
+- Name of a relation is case-sensitive.
+
+# RelaX Example
+
+![alt text](../assets/P5/relaxexample.png){ width=700 }
+
+# [RelaX Website](https://dbis-uibk.github.io/relax/)
 
 *(Free online tool to practice relational algebra expressions with instant results and SQL comparison.)*
 
-## Core Relational Algebra
+# Core Relational Algebra
 
 * **Union, intersection, and difference.**
     * Usual set operations, but **both operands must have the same relation schema.**
@@ -13,7 +32,7 @@
 * **Products** and **joins**: compositions of relations.
 * **Renaming** of relations and attributes.
 
-## Union, intersection, difference
+# Union, intersection, difference
 
 * **\( R \cup S \)**
     * `SELECT ... UNION SELECT ...;`
@@ -24,14 +43,14 @@
     * `SELECT ... MINUS SELECT ...;`
     * (Some DBMS uses EXCEPT)
 
-## Selection
+# Selection
 
 * **\( R1 := \sigma_{C}(R2) \)**
     * \( C \) is a condition (as in "if" statements) that refers to attributes of \( R2 \).
     * \( R1 \) is all those tuples of \( R2 \) that satisfy \( C \).
     * `SELECT * FROM R2 WHERE C;`
 
-## Projection
+# Projection
 
 * **\( R1 := \pi_{L}(R2) \)**
     * \( L \) is a list of attributes from the schema of \( R2 \).
@@ -39,7 +58,7 @@
     * Eliminate duplicate tuples, if any.
     * `SELECT DISTINCT L FROM R2;`
 
-## Extended Projection
+# Extended Projection
 
 * **Using the same \( \pi_L \) operator, we allow the list \( L \) to contain arbitrary expressions involving attributes:**
     1. Arithmetic on attributes, e.g., \( A+B \rightarrow C \).
@@ -47,7 +66,7 @@
 * `SELECT A+B AS C FROM R;`
 * (AS -> optional)
 
-## Product
+# Product
 
 * **\( R3 := R1 \times R2 \)**
     * Pair each tuple \( t1 \) of \( R1 \) with each tuple \( t2 \) of \( R2 \).
@@ -57,7 +76,7 @@
 * `SELECT * FROM R1, R2;` or
 * `SELECT * FROM R1 CROSS JOIN R2;`
 
-## Theta-Join
+# Theta-Join
 
 * **\( R3 := R1 \bowtie_{C} R2 \)**
     * Take the product \( R1 \times R2 \).
@@ -66,7 +85,7 @@
     * Historic versions of this operator allowed only \( A\ \theta\ B \), where \( \theta \) is \( =, < \), etc.; hence the name "theta-join."
 * `SELECT * FROM R1 JOIN R2 ON (C);`
 
-## Natural Join
+# Natural Join
 
 * **A useful join variant (natural join) connects two relations by:**
     * Equating attributes of the same name, and
@@ -74,7 +93,7 @@
 * **Denoted \( R3 := R1 \bowtie R2 \).**
 * `SELECT * FROM R1 NATURAL JOIN R2;`
 
-## Renaming
+# Renaming
 
 * **The \( \rho \) operator gives a new schema to a relation.**
 * **\( R1 := \rho_{R1(A1, ..., An)}(R2) \) makes \( R1 \) be a relation with attributes \( A1, ..., An \) and the same tuples as \( R2 \).**
@@ -82,7 +101,7 @@
 * `SELECT X1 A1, X2 A2, ... Xn An FROM R2;`
 * `CREATE TABLE R1 AS SELECT X1 A1, X2 A2, ... Xn An FROM R2;`
 
-## Sequences of Assignments
+# Sequences of Assignments
 
 * **Create temporary relation names.**
 * **Renaming can be implied by giving relations a list of attributes.**
@@ -90,7 +109,7 @@
     * \( R4 := R1 \times R2 \) (`CREATE TABLE R4 ...`)
     * \( R3 := \sigma_{C}(R4) \) (`SELECT ... FROM R4 ...`)
 
-## Expressions in a Single Assignment
+# Expressions in a Single Assignment
 
 * **Example: the theta-join \( R3 := R1 \bowtie_{C} R2 \) can be written:**
     * \( R3 := \sigma_{C}(R1 \times R2) \)
@@ -100,7 +119,7 @@
     3. \( \cap \).
     4. \( [\cup, -] \).
 
-## The Extended Algebra
+# The Extended Algebra
 
 * **\( \pi_{L} \) extended projection**
 * **\( \delta \) = eliminate duplicates from bags.**
@@ -108,7 +127,7 @@
 * **\( \gamma \) = grouping and aggregation.**
 * **Outerjoin: avoids "dangling tuples" = tuples that do not join with anything.**
 
-## Extended Projection
+# Extended Projection
 
 * **Using the same \( \pi_{L} \) operator, we allow the list \( L \) to contain arbitrary expressions involving attributes:**
     1. **Arithmetic on attributes, e.g., \( A+B \rightarrow C \)**
@@ -117,12 +136,12 @@
 * `SELECT A+B AS C FROM R;`
 * ("AS" is optional)
 
-## Duplicate Elimination
+# Duplicate Elimination
 
 * **\( R1 := \delta(R2) \).**
 * **\( R1 \) consists of one copy of each tuple that appears in \( R2 \) one or more times.**
 
-## Sorting
+# Sorting
 
 * **\( R1 := \tau_{L}(R2) \).**
     * \( L \) is a list of some of the attributes of \( R2 \).
@@ -130,7 +149,7 @@
     * Break ties arbitrarily.
 * **\( \tau \) is the only operator whose result is neither a set nor a bag.**
 
-## Aggregation Operators
+# Aggregation Operators
 
 * **Aggregation operators are not operators of relational algebra.**
 * **Rather, they apply to entire columns of a table and produce a single result.**
@@ -141,30 +160,30 @@
         * \( MAX(B) = 4 \)
         * \( AVG(B) = 3 \)
 
-## Grouping Operator
+# Grouping Operator
 
 * **\( R1 := \gamma_{L}(R2) \). \( L \) is a list of elements that are either:**
     1. Individual (grouping) attributes.
     2. \( AGG(A) \), where \( AGG \) is one of the aggregation operators and \( A \) is an attribute.
         * An arrow and a new attribute name renames the component.
 
-## Applying \( \gamma\ L\ (R) \)
+# Applying \( \gamma\ L\ (R) \)
 
 * **Group \( R \) according to all the grouping attributes on list \( L \).**
     * That is: form one group for each distinct list of values for those attributes in \( R \).
 * **Within each group, compute \( AGG(A) \) for each aggregation on list \( L \).**
 * **Result has one tuple for each group:**
     1. The grouping attributes and
-    2. Their group's aggregations.
+    2. Their group’s aggregations.
 
-## Outer join
+# Outer join
 
 * **Suppose we join \( R \bowtie_{C} S \).**
 * **A tuple of \( R \) that has no tuple of \( S \) with which it joins is said to be dangling.**
     * Similarly for a tuple of \( S \).
 * **Outerjoin preserves dangling tuples by padding them NULL.**
 
-## Relational Algebra to SQL Examples
+# Examples
 
 | Relational Algebra Expression                          | SQL Equivalent                                                                 |
 |--------------------------------------------------------|--------------------------------------------------------------------------------|
@@ -185,7 +204,7 @@
 | Outer join                                             | `SELECT * FROM R NATURAL LEFT OUTER JOIN S;`                                   |
 | Outer join                                             | `SELECT * FROM R LEFT OUTER JOIN S ON R.B > S.D;`                              |
 
-## Execution steps
+# Execution steps
 
 **Execution steps of a SELECT statement expressed in relational algebra:**
 
