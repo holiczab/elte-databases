@@ -15,7 +15,7 @@
 **Resources:**
 - [Introduction](sql/01_Introduction.md)
 - [Basic SQL Statements](sql/02_Basic_sql_statements.md)
-- [Set Operators](sql/03_Set_Operators.md)
+- [Set Operators](sql/03_Set_operator.md)
 
 ---
 

@@ -51,7 +51,7 @@ nav:
 - SQL Basics:
   - Introduction: sql/01_Introduction.md
   - Basic SQL Statements: sql/02_Basic_sql_statements.md
-  - Set Operators: sql/03_Set_Operators.md
+  - Set Operators: sql/03_Set_operator.md
   - Data Types: sql/04_Data_types.md
   - SQL Functions: sql/05_Sql_functions.md
   - Character Functions: sql/06_Character_functions.md
