@@ -1,0 +1,1999 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../18_Views/">
+      
+      
+        <link rel="next" href="../../pl_sql/01_PL_SQL_basics/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Relational Algebra - ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#relation-algebra" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" class="md-header__button md-logo" aria-label="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" data-md-component="logo">
+      
+  <img src="../../assets/database.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Relational Algebra
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../topics/" class="md-tabs__link">
+          
+  
+  
+  Practice Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01_Introduction/" class="md-tabs__link">
+          
+  
+  
+  SQL Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pl_sql/01_PL_SQL_basics/" class="md-tabs__link">
+          
+  
+  
+  PL/SQL Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../pl_sql_optimization/none/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PL/SQL Optimization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../advanced_pl_sql/none/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Advanced PL/SQL
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" class="md-nav__button md-logo" aria-label="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" data-md-component="logo">
+      
+  <img src="../../assets/database.png" alt="logo">
+
+    </a>
+    ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practice Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practice Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB1 Practice Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB2 Practice Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_Basic_sql_statements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic SQL Statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_Set_operator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_Data_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_Sql_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_Character_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Character Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_Number_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Number Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_Date_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_Conversion_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conversion Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_Other_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Other Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_Conditional_expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditional Expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_Group_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Group Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_Group_by/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Group By
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_Joins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Joins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_Subqueries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subqueries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_With/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    With
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_DML_DDL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DML and DDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_Views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational Algebra
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational Algebra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relation-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relation Algebra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-relational-algebra-calculator-relax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A relational algebra calculator - RelaX
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relax-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelaX Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relax-website" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelaX Website
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-relational-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Relational Algebra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#union-intersection-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Union, intersection, difference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Projection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extended-projection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extended Projection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theta-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theta-Join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Natural Join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#renaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renaming
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequences-of-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequences of Assignments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressions-in-a-single-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expressions in a Single Assignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-extended-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Extended Algebra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extended-projection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extended Projection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duplicate-elimination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duplicate Elimination
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sorting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aggregation-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aggregation Operators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grouping-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grouping Operator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applying-gamma-l-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applying \( \gamma\ L\ (R) \)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outer-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outer join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PL/SQL Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/01_PL_SQL_basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/02_Cursors_and_collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cursors and Collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/03_Exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/04_Recurson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql_optimization/none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced_pl_sql/none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced PL/SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Relational Algebra</h1>
+
+<h2 id="relation-algebra">Relation Algebra</h2>
+<p><img alt="alt text" src="../../assets/P5/rel.png" width="700" /></p>
+<h2 id="a-relational-algebra-calculator-relax">A relational algebra calculator - RelaX</h2>
+<ul>
+<li>https://dbis-uibk.github.io/relax/landing</li>
+<li>An online tool designed to help users learn and practice relational algebra by executing queries and visualizing the results</li>
+<li>How to create relations and insert tuples into them:<ol>
+<li>Click on 'Group Editor' tab</li>
+<li>Copy into 'Group Editor' window your data. Find below my examples!</li>
+<li>Click on "preview" button then double click on "use Group in editor" button</li>
+<li>Now you can run your queries clicking on 'Relational Algebra' or 'SQL' tab.</li>
+</ol>
+</li>
+<li>This implementation allows only sets and not multisets.</li>
+<li>There are differences between Oracle and Relax SQL syntax.</li>
+<li>Name of a relation is case-sensitive.</li>
+</ul>
+<h2 id="relax-example">RelaX Example</h2>
+<p><img alt="alt text" src="../../assets/P5/relaxexample.png" width="700" /></p>
+<h2 id="relax-website"><a href="https://dbis-uibk.github.io/relax/">RelaX Website</a></h2>
+<p><em>(Free online tool to practice relational algebra expressions with instant results and SQL comparison.)</em></p>
+<h2 id="core-relational-algebra">Core Relational Algebra</h2>
+<ul>
+<li><strong>Union, intersection, and difference.</strong><ul>
+<li>Usual set operations, but <strong>both operands must have the same relation schema.</strong></li>
+</ul>
+</li>
+<li><strong>Selection</strong>: picking certain rows.</li>
+<li><strong>Projection</strong>: picking certain columns.</li>
+<li><strong>Products</strong> and <strong>joins</strong>: compositions of relations.</li>
+<li><strong>Renaming</strong> of relations and attributes.</li>
+</ul>
+<h2 id="union-intersection-difference">Union, intersection, difference</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R \cup S \)</span></strong><ul>
+<li><code>SELECT ... UNION SELECT ...;</code></li>
+<li>(Duplicate elimination: UNION ALL: multiset, UNION: set)</li>
+</ul>
+</li>
+<li><strong><span class="arithmatex">\( R \cap S \)</span></strong><ul>
+<li><code>SELECT ... INTERSECT SELECT ...;</code></li>
+</ul>
+</li>
+<li><strong><span class="arithmatex">\( R - S \)</span></strong><ul>
+<li><code>SELECT ... MINUS SELECT ...;</code></li>
+<li>(Some DBMS uses EXCEPT)</li>
+</ul>
+</li>
+</ul>
+<h2 id="selection">Selection</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R1 := \sigma_{C}(R2) \)</span></strong><ul>
+<li><span class="arithmatex">\( C \)</span> is a condition (as in "if" statements) that refers to attributes of <span class="arithmatex">\( R2 \)</span>.</li>
+<li><span class="arithmatex">\( R1 \)</span> is all those tuples of <span class="arithmatex">\( R2 \)</span> that satisfy <span class="arithmatex">\( C \)</span>.</li>
+<li><code>SELECT * FROM R2 WHERE C;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="projection">Projection</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R1 := \pi_{L}(R2) \)</span></strong><ul>
+<li><span class="arithmatex">\( L \)</span> is a list of attributes from the schema of <span class="arithmatex">\( R2 \)</span>.</li>
+<li><span class="arithmatex">\( R1 \)</span> is constructed by looking at each tuple of <span class="arithmatex">\( R2 \)</span>, extracting the attributes on list <span class="arithmatex">\( L \)</span>, in the order specified, and creating from those components a tuple for <span class="arithmatex">\( R1 \)</span>.</li>
+<li>Eliminate duplicate tuples, if any.</li>
+<li><code>SELECT DISTINCT L FROM R2;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="extended-projection">Extended Projection</h2>
+<ul>
+<li><strong>Using the same <span class="arithmatex">\( \pi_L \)</span> operator, we allow the list <span class="arithmatex">\( L \)</span> to contain arbitrary expressions involving attributes:</strong><ol>
+<li>Arithmetic on attributes, e.g., <span class="arithmatex">\( A+B \rightarrow C \)</span>.</li>
+<li>Duplicate occurrences of the same attribute.</li>
+</ol>
+</li>
+<li><code>SELECT A+B AS C FROM R;</code></li>
+<li>(AS -&gt; optional)</li>
+</ul>
+<h2 id="product">Product</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R3 := R1 \times R2 \)</span></strong><ul>
+<li>Pair each tuple <span class="arithmatex">\( t1 \)</span> of <span class="arithmatex">\( R1 \)</span> with each tuple <span class="arithmatex">\( t2 \)</span> of <span class="arithmatex">\( R2 \)</span>.</li>
+<li>Concatenation <span class="arithmatex">\( t1t2 \)</span> is a tuple of <span class="arithmatex">\( R3 \)</span>.</li>
+<li>Schema of <span class="arithmatex">\( R3 \)</span> is the attributes of <span class="arithmatex">\( R1 \)</span> and then <span class="arithmatex">\( R2 \)</span>, in order.</li>
+<li>But beware attribute <span class="arithmatex">\( A \)</span> of the same name in <span class="arithmatex">\( R1 \)</span> and <span class="arithmatex">\( R2 \)</span>: use <span class="arithmatex">\( R1.A \)</span> and <span class="arithmatex">\( R2.A \)</span>.</li>
+</ul>
+</li>
+<li><code>SELECT * FROM R1, R2;</code> or</li>
+<li><code>SELECT * FROM R1 CROSS JOIN R2;</code></li>
+</ul>
+<h2 id="theta-join">Theta-Join</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R3 := R1 \bowtie_{C} R2 \)</span></strong><ul>
+<li>Take the product <span class="arithmatex">\( R1 \times R2 \)</span>.</li>
+<li>Then apply <span class="arithmatex">\( \sigma_{C} \)</span> to the result.</li>
+</ul>
+</li>
+<li><strong>As for <span class="arithmatex">\( \sigma \)</span>, <span class="arithmatex">\( C \)</span> can be any boolean-valued condition.</strong><ul>
+<li>Historic versions of this operator allowed only <span class="arithmatex">\( A\ \theta\ B \)</span>, where <span class="arithmatex">\( \theta \)</span> is <span class="arithmatex">\( =, &lt; \)</span>, etc.; hence the name "theta-join."</li>
+</ul>
+</li>
+<li><code>SELECT * FROM R1 JOIN R2 ON (C);</code></li>
+</ul>
+<h2 id="natural-join">Natural Join</h2>
+<ul>
+<li><strong>A useful join variant (natural join) connects two relations by:</strong><ul>
+<li>Equating attributes of the same name, and</li>
+<li>Projecting out one copy of each pair of equated attributes.</li>
+</ul>
+</li>
+<li><strong>Denoted <span class="arithmatex">\( R3 := R1 \bowtie R2 \)</span>.</strong></li>
+<li><code>SELECT * FROM R1 NATURAL JOIN R2;</code></li>
+</ul>
+<h2 id="renaming">Renaming</h2>
+<ul>
+<li><strong>The <span class="arithmatex">\( \rho \)</span> operator gives a new schema to a relation.</strong></li>
+<li><strong><span class="arithmatex">\( R1 := \rho_{R1(A1, ..., An)}(R2) \)</span> makes <span class="arithmatex">\( R1 \)</span> be a relation with attributes <span class="arithmatex">\( A1, ..., An \)</span> and the same tuples as <span class="arithmatex">\( R2 \)</span>.</strong></li>
+<li><strong>Simplified notation: <span class="arithmatex">\( R1(A1, ..., An) := R2 \)</span>.</strong></li>
+<li><code>SELECT X1 A1, X2 A2, ... Xn An FROM R2;</code></li>
+<li><code>CREATE TABLE R1 AS SELECT X1 A1, X2 A2, ... Xn An FROM R2;</code></li>
+</ul>
+<h2 id="sequences-of-assignments">Sequences of Assignments</h2>
+<ul>
+<li><strong>Create temporary relation names.</strong></li>
+<li><strong>Renaming can be implied by giving relations a list of attributes.</strong></li>
+<li><strong>Example: <span class="arithmatex">\( R3 := R1 \bowtie_{C} R2 \)</span> can be written:</strong><ul>
+<li><span class="arithmatex">\( R4 := R1 \times R2 \)</span> (<code>CREATE TABLE R4 ...</code>)</li>
+<li><span class="arithmatex">\( R3 := \sigma_{C}(R4) \)</span> (<code>SELECT ... FROM R4 ...</code>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="expressions-in-a-single-assignment">Expressions in a Single Assignment</h2>
+<ul>
+<li><strong>Example: the theta-join <span class="arithmatex">\( R3 := R1 \bowtie_{C} R2 \)</span> can be written:</strong><ul>
+<li><span class="arithmatex">\( R3 := \sigma_{C}(R1 \times R2) \)</span></li>
+</ul>
+</li>
+<li><strong>Precedence of relational operators:</strong><ol>
+<li><span class="arithmatex">\( [\sigma, \pi, \rho] \)</span> (highest).</li>
+<li><span class="arithmatex">\( [\times, \bowtie] \)</span>.</li>
+<li><span class="arithmatex">\( \cap \)</span>.</li>
+<li><span class="arithmatex">\( [\cup, -] \)</span>.</li>
+</ol>
+</li>
+</ul>
+<h2 id="the-extended-algebra">The Extended Algebra</h2>
+<ul>
+<li><strong><span class="arithmatex">\( \pi_{L} \)</span> extended projection</strong></li>
+<li><strong><span class="arithmatex">\( \delta \)</span> = eliminate duplicates from bags.</strong></li>
+<li><strong><span class="arithmatex">\( \tau \)</span> = sort tuples.</strong></li>
+<li><strong><span class="arithmatex">\( \gamma \)</span> = grouping and aggregation.</strong></li>
+<li><strong>Outerjoin: avoids "dangling tuples" = tuples that do not join with anything.</strong></li>
+</ul>
+<h2 id="extended-projection_1">Extended Projection</h2>
+<ul>
+<li><strong>Using the same <span class="arithmatex">\( \pi_{L} \)</span> operator, we allow the list <span class="arithmatex">\( L \)</span> to contain arbitrary expressions involving attributes:</strong><ol>
+<li><strong>Arithmetic on attributes, e.g., <span class="arithmatex">\( A+B \rightarrow C \)</span></strong><ul>
+<li>"→" stands for renaming the attribute in the result to "<span class="arithmatex">\( C \)</span>"</li>
+</ul>
+</li>
+<li><strong>Duplicate occurrences of the same attribute.</strong></li>
+</ol>
+</li>
+<li><code>SELECT A+B AS C FROM R;</code></li>
+<li>("AS" is optional)</li>
+</ul>
+<h2 id="duplicate-elimination">Duplicate Elimination</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R1 := \delta(R2) \)</span>.</strong></li>
+<li><strong><span class="arithmatex">\( R1 \)</span> consists of one copy of each tuple that appears in <span class="arithmatex">\( R2 \)</span> one or more times.</strong></li>
+</ul>
+<h2 id="sorting">Sorting</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R1 := \tau_{L}(R2) \)</span>.</strong><ul>
+<li><span class="arithmatex">\( L \)</span> is a list of some of the attributes of <span class="arithmatex">\( R2 \)</span>.</li>
+</ul>
+</li>
+<li><strong><span class="arithmatex">\( R1 \)</span> is the list of tuples of <span class="arithmatex">\( R2 \)</span> sorted first on the value of the first attribute on <span class="arithmatex">\( L \)</span>, then on the second attribute of <span class="arithmatex">\( L \)</span>, and so on.</strong><ul>
+<li>Break ties arbitrarily.</li>
+</ul>
+</li>
+<li><strong><span class="arithmatex">\( \tau \)</span> is the only operator whose result is neither a set nor a bag.</strong></li>
+</ul>
+<h2 id="aggregation-operators">Aggregation Operators</h2>
+<ul>
+<li><strong>Aggregation operators are not operators of relational algebra.</strong></li>
+<li><strong>Rather, they apply to entire columns of a table and produce a single result.</strong></li>
+<li><strong>The most important examples: SUM, AVG, COUNT, MIN, and MAX.</strong><ul>
+<li>Example with Table <span class="arithmatex">\( R(A, B) \)</span>:<ul>
+<li><span class="arithmatex">\( SUM(A) = 7 \)</span></li>
+<li><span class="arithmatex">\( COUNT(A) = 3 \)</span></li>
+<li><span class="arithmatex">\( MAX(B) = 4 \)</span></li>
+<li><span class="arithmatex">\( AVG(B) = 3 \)</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="grouping-operator">Grouping Operator</h2>
+<ul>
+<li><strong><span class="arithmatex">\( R1 := \gamma_{L}(R2) \)</span>. <span class="arithmatex">\( L \)</span> is a list of elements that are either:</strong><ol>
+<li>Individual (grouping) attributes.</li>
+<li><span class="arithmatex">\( AGG(A) \)</span>, where <span class="arithmatex">\( AGG \)</span> is one of the aggregation operators and <span class="arithmatex">\( A \)</span> is an attribute.<ul>
+<li>An arrow and a new attribute name renames the component.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="applying-gamma-l-r">Applying <span class="arithmatex">\( \gamma\ L\ (R) \)</span></h2>
+<ul>
+<li><strong>Group <span class="arithmatex">\( R \)</span> according to all the grouping attributes on list <span class="arithmatex">\( L \)</span>.</strong><ul>
+<li>That is: form one group for each distinct list of values for those attributes in <span class="arithmatex">\( R \)</span>.</li>
+</ul>
+</li>
+<li><strong>Within each group, compute <span class="arithmatex">\( AGG(A) \)</span> for each aggregation on list <span class="arithmatex">\( L \)</span>.</strong></li>
+<li><strong>Result has one tuple for each group:</strong><ol>
+<li>The grouping attributes and</li>
+<li>Their group’s aggregations.</li>
+</ol>
+</li>
+</ul>
+<h2 id="outer-join">Outer join</h2>
+<ul>
+<li><strong>Suppose we join <span class="arithmatex">\( R \bowtie_{C} S \)</span>.</strong></li>
+<li><strong>A tuple of <span class="arithmatex">\( R \)</span> that has no tuple of <span class="arithmatex">\( S \)</span> with which it joins is said to be dangling.</strong><ul>
+<li>Similarly for a tuple of <span class="arithmatex">\( S \)</span>.</li>
+</ul>
+</li>
+<li><strong>Outerjoin preserves dangling tuples by padding them NULL.</strong></li>
+</ul>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Relational Algebra Expression</th>
+<th>SQL Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\( \pi_{A, B+C \rightarrow X}(R) \)</span></td>
+<td><code>SELECT A, B+C AS X FROM R;</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \delta(R) \)</span></td>
+<td><code>SELECT DISTINCT * FROM R;</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( R \cup S \)</span></td>
+<td><code>SELECT * FROM R UNION ALL SELECT * FROM S;</code> (multiset)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( R \cap S \)</span></td>
+<td><code>SELECT * FROM R INTERSECT ALL SELECT * FROM S;</code> <strong>(!)</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( R - S \)</span></td>
+<td><code>SELECT * FROM R MINUS ALL SELECT * FROM S;</code> <strong>(!)</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \delta(R \cup S) \)</span></td>
+<td><code>SELECT * FROM R UNION SELECT * FROM S;</code> (set)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \delta(R \cap S) \)</span></td>
+<td><code>SELECT * FROM R INTERSECT SELECT * FROM S;</code> (set)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \delta(R) - \delta(S) \)</span></td>
+<td><code>SELECT * FROM R MINUS SELECT * FROM S;</code> (set)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( R \bowtie S \)</span></td>
+<td><code>SELECT * FROM R NATURAL JOIN S;</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( R \bowtie_{\theta} S \)</span></td>
+<td><code>SELECT * FROM R JOIN S ON (\theta);</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( R \times S \)</span></td>
+<td><code>SELECT * FROM R CROSS JOIN S;</code> or <code>SELECT * FROM R, S;</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \gamma_{A, SUM(B)}(R) \)</span></td>
+<td><code>SELECT A, SUM(B) FROM R GROUP BY A;</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \gamma_{A, COUNT(B)}(\delta \pi_{A,B} R) \)</span></td>
+<td><code>SELECT A, COUNT(DISTINCT B) FROM R GROUP BY A;</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \tau_{A, B+C}(R) \)</span></td>
+<td><code>SELECT * FROM R ORDER BY A, B+C;</code></td>
+</tr>
+<tr>
+<td>Outer join</td>
+<td><code>SELECT * FROM R NATURAL LEFT OUTER JOIN S;</code></td>
+</tr>
+<tr>
+<td>Outer join</td>
+<td><code>SELECT * FROM R LEFT OUTER JOIN S ON R.B &gt; S.D;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="execution-steps">Execution steps</h2>
+<p><strong>Execution steps of a SELECT statement expressed in relational algebra:</strong></p>
+<ol>
+<li>Replace all usages of the temporary-tables defined in the <strong>WITH</strong>-clause.</li>
+<li><span class="arithmatex">\( \bowtie \)</span> joins or product operations after <strong>FROM</strong>-clause.</li>
+<li><span class="arithmatex">\( \sigma \)</span> selection based on the <strong>WHERE</strong>-clause.</li>
+<li><span class="arithmatex">\( \gamma \)</span> creating groups and computing aggregations, based on <strong>GROUP BY</strong>-clause.</li>
+<li><span class="arithmatex">\( \sigma \)</span> selection for the groups or tuples created from the groups, based on <strong>HAVING</strong>-clause.</li>
+<li><span class="arithmatex">\( \pi \)</span> projection based on <strong>SELECT</strong>-clause.</li>
+<li><span class="arithmatex">\( \rho \)</span> rename result attributes based on <strong>AS</strong> keyword.</li>
+<li><span class="arithmatex">\( \cup \cap - \)</span> <strong>UNION, INTERSECT, MINUS</strong> set operations.</li>
+<li><span class="arithmatex">\( \delta \)</span> duplicate elimination if we have <strong>DISTINCT</strong>.</li>
+<li><span class="arithmatex">\( \tau \)</span> sorting based on <strong>ORDER BY</strong> clause.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Holicza Barnabás & ELTE
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

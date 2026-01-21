@@ -1,0 +1,2127 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../03_Exceptions/">
+      
+      
+        <link rel="next" href="../../pl_sql_optimization/none/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Recursion - ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#recursion-in-sql-and-datalog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" class="md-header__button md-logo" aria-label="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" data-md-component="logo">
+      
+  <img src="../../assets/database.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Recursion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../topics/" class="md-tabs__link">
+          
+  
+  
+  Practice Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../sql/01_Introduction/" class="md-tabs__link">
+          
+  
+  
+  SQL Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01_PL_SQL_basics/" class="md-tabs__link">
+          
+  
+  
+  PL/SQL Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../pl_sql_optimization/none/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PL/SQL Optimization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../advanced_pl_sql/none/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Advanced PL/SQL
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" class="md-nav__button md-logo" aria-label="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" data-md-component="logo">
+      
+  <img src="../../assets/database.png" alt="logo">
+
+    </a>
+    ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practice Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practice Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB1 Practice Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB2 Practice Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/01_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/02_Basic_sql_statements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic SQL Statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/03_Set_operator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/04_Data_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/05_Sql_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/06_Character_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Character Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/07_Number_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Number Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/08_Date_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/09_Conversion_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conversion Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/10_Other_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Other Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/11_Conditional_expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditional Expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/12_Group_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Group Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/13_Group_by/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Group By
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/14_Joins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Joins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/15_Subqueries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subqueries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/16_With/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    With
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/17_DML_DDL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DML and DDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/18_Views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/19_Relational_algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational Algebra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PL/SQL Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_PL_SQL_basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_Cursors_and_collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cursors and Collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_Exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recursion-in-sql-and-datalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursion in SQL and Datalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flight-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flight Table:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datalog-programs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DATALOG programs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-recursive-datalog-program-for-the-reaches-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A recursive DATALOG program for the REACHES table:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#another-recursion-in-sql-start-with-connect-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Another recursion in SQL (START WITH, CONNECT BY)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-of-evaluation-in-recursive-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps of evaluation in recursive queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-is-a-unary-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PRIOR is a unary operator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-pszeudo-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LEVEL pszeudo column
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ordering-siblings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ordering siblings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect_by_root-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CONNECT_BY_ROOT operator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sys_connect_by_path-function-sys_connect_by_pathcolumn-char" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SYS_CONNECT_BY_PATH function: SYS_CONNECT_BY_PATH(column, char)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-pszeudo-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other pszeudo columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#produce-a-relation-factorialn-val-where-val-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Produce a relation Factorial(n, val) where val = n!
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql_optimization/none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced_pl_sql/none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced PL/SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Recursion</h1>
+
+<h2 id="recursion-in-sql-and-datalog">Recursion in SQL and Datalog</h2>
+<p><img alt="alt text" src="../../assets/P11/graph.png" width="700" /></p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Create an empty table then insert rows:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Flight</span><span class="p">(</span><span class="n">airline</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w"> </span><span class="n">cost</span><span class="w"> </span><span class="nb">NUMBER</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">);</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="p">);</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;New York&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;New York&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">);</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1">-- The tuples are not the same as in TextBook. I inserted an extra tuple </span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1">-- in order to have a cycle in the graph of Flight table. </span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1">--&gt; orig = &#39;Chicago&#39; and dest = &#39;Denver&#39;;</span>
+</span></code></pre></div>
+<h2 id="flight-table">Flight Table:</h2>
+<table>
+<thead>
+<tr>
+<th>Airline</th>
+<th>Origin</th>
+<th>Destination</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lufthansa</td>
+<td>San Francisco</td>
+<td>Denver</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>Lufthansa</td>
+<td>San Francisco</td>
+<td>Dallas</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>Lufthansa</td>
+<td>Denver</td>
+<td>Dallas</td>
+<td>500</td>
+</tr>
+<tr>
+<td>Lufthansa</td>
+<td>Denver</td>
+<td>Chicago</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>Lufthansa</td>
+<td>Dallas</td>
+<td>Chicago</td>
+<td>600</td>
+</tr>
+<tr>
+<td>Lufthansa</td>
+<td>Dallas</td>
+<td>New York</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>Lufthansa</td>
+<td>Chicago</td>
+<td>New York</td>
+<td>3000</td>
+</tr>
+<tr>
+<td>Lufthansa</td>
+<td>Chicago</td>
+<td>Denver</td>
+<td>2000</td>
+</tr>
+</tbody>
+</table>
+<h2 id="datalog-programs">DATALOG programs</h2>
+<p>Datalog is a logical query language (Data Logic). See textbook (Ullman ch. 5.3, 5.4 and 10.2)</p>
+<p>Let's see relation Reaches(x,y) which answers the following query.</p>
+<p>For what pairs of cities (x, y) is it possible to get from city x to city y by taking one or more flights?</p>
+<h2 id="a-recursive-datalog-program-for-the-reaches-table">A recursive DATALOG program for the REACHES table:</h2>
+<p>Reaches(X,Y)  &lt;--  Flight(<em>,X,Y,</em>)</p>
+<p>Reaches(X,Y)  &lt;--  Reaches(X,Z) AND Reaches(Z,Y) AND X &lt;&gt; Y</p>
+<p>Most DBMS-s allow only linear recursion in recursive queries, which means: no rule has more than one subgoal that is mutually recursive with the head. </p>
+<p>---&gt; if there is a cycle involving R and S, they are mutually recursive</p>
+<p>In the previous datalog program the second rule violates this requirement.</p>
+<p>The datalog program below contains only linear recursion:</p>
+<p>Reaches(X,Y)  &lt;--  Flight(<em>,X,Y,</em>)</p>
+<p>Reaches(X,Y)  &lt;--  Flight(<em>,X,Z,</em>) AND Reaches(Z,Y) AND X &lt;&gt; Y</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- SQL query  (Flight is the first edge on the route)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">---------</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">WITH</span><span class="w">  </span><span class="n">reaches</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">   </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">reaches</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">dest</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="k">CYCLE</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="w"> </span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">distinct</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+Chicago Dallas  N
+Chicago Denver  N
+Chicago New York N
+Chicago New York Y
+Dallas Chicago  N
+...
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- Another SQL query  (Flight is the last edge on the route)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">-----------------</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">WITH</span><span class="w">  </span><span class="n">reaches</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">   </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="p">,</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">orig</span><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">dest</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="k">CYCLE</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="w"> </span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">distinct</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+Chicago Dallas     N
+Chicago Denver      N
+Chicago New York    N
+Dallas Chicago     N
+Dallas Chicago     Y
+Dallas Denver     N
+Dallas New York    N
+Denver Chicago     N
+...
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">-- SQL query with non-linear recursion      ---&gt; Error message below</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">-----------------------------------</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WITH</span><span class="w">  </span><span class="n">reaches</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">   </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">r1</span><span class="p">.</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">r2</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="w"> </span><span class="n">r1</span><span class="p">,</span><span class="w"> </span><span class="n">reaches</span><span class="w"> </span><span class="n">r2</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">r1</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r2</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">r1</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">r2</span><span class="p">.</span><span class="n">dest</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="k">CYCLE</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="n">dest</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="w"> </span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">distinct</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Error message:
+--------------
+32490. 00000 -  "recursive query name referenced more than once in recursive branch of recursive WITH clause element"
+*Cause:    The recursive component of the UNION ALL in a recursive WITH clause
+           element referenced the recursive query name more than once.  Only
+           one reference to the recursive query name is allowed in the
+           recursive branch of a recursive WITH clause element.
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">-- SQL query which lists the edges on the route</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">--------------------------------------------</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">WITH</span><span class="w">  </span><span class="n">reaches</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">edges</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">orig</span><span class="o">||</span><span class="s1">&#39;.&#39;</span><span class="o">||</span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">   </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">edges</span><span class="o">||</span><span class="s1">&#39;.&#39;</span><span class="o">||</span><span class="n">flight</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="p">,</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">orig</span><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">dest</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="k">CYCLE</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="n">dest</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="w"> </span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">distinct</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">edges</span><span class="p">,</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+Chicago Dallas     Chicago.Denver.Dallas           N
+Chicago Denver     Chicago.Denver                  N
+Chicago New York    Chicago.Denver.Dallas.New York  N
+Chicago New York    Chicago.New York                N
+Dallas Chicago     Dallas.Chicago                  N
+Dallas Chicago     Dallas.Chicago.Denver.Chicago   Y
+...
+</pre>
+
+<h2 id="another-recursion-in-sql-start-with-connect-by">Another recursion in SQL  (START WITH, CONNECT BY)</h2>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">...</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">condition</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">condition</span>
+</span></code></pre></div>
+<p>This is a special SQL query type by which we can query tree structures (graphs).</p>
+<p>We identify the root of the tree with START WITH condition.</p>
+<p>We identify the parent-child relationship with CONNECT BY condition.</p>
+<p>In CONNECT BY we have to use the PRIOR keyword to distinguish the column of a parent and a child node (row).</p>
+<ul>
+<li>START WITH -&gt; finds root node (or root nodes)</li>
+<li>CONNECT BY -&gt; relationship between parent and child rows (we should use PRIOR for parent rows)</li>
+</ul>
+<h2 id="steps-of-evaluation-in-recursive-queries">Steps of evaluation in recursive queries</h2>
+<ol>
+<li>START WITH selects root nodes (rows)</li>
+<li>CONNECT BY finds children of roots</li>
+<li>Finds ancestors with a depth first strategy</li>
+<li>WHERE filters rows. If condition is TRUE, record remains in result set.</li>
+<li>Returns rows in preorder traversal.</li>
+</ol>
+<p>If a SELECT uses CONNECT BY, take care with JOINS.</p>
+<p>We can use several conditions after CONNECT BY. eg.</p>
+<p>CONNECT BY PRIOR empno = mgr AND sal &gt; comm</p>
+<p>empno -&gt; parent node or record (see PRIOR), other columns -&gt; child node (record)</p>
+<h2 id="prior-is-a-unary-operator">PRIOR is a unary operator</h2>
+<p>We must use PRIOR in CONNECT BY clause at least once, otherwise we cannot express the parent-child relationship.</p>
+<h2 id="level-pszeudo-column">LEVEL pszeudo column</h2>
+<p>It returns 1 for root nodes, 2 for their children, etc.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- Example:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">--------</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">SELECT</span><span class="w">   </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="k">LEVEL</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ename</span><span class="p">,</span><span class="w"> </span><span class="n">empno</span><span class="p">,</span><span class="w"> </span><span class="n">mgr</span><span class="p">,</span><span class="w"> </span><span class="n">job</span><span class="p">,</span><span class="w"> </span><span class="k">LEVEL</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">emp</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">   </span><span class="n">job</span><span class="o">=</span><span class="s1">&#39;PRESIDENT&#39;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">empno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mgr</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+KING 7839 PRESIDENT 1
+  JONES 7566 7839 MANAGER 2
+    SCOTT 7788 7566 ANALYST 3
+      ADAMS 7876 7788 CLERK 4
+    FORD 7902 7566 ANALYST 3
+      SMITH 7369 7902 CLERK 4
+  BLAKE 7698 7839 MANAGER 2
+</pre>
+
+<h2 id="ordering-siblings">Ordering siblings</h2>
+<p>ORDER BY  -&gt; SIBLINGS [NULLS FIRST | NULLS LAST] </p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">-- Example:</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1">--------</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">SELECT</span><span class="w">   </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="k">LEVEL</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ename</span><span class="p">,</span><span class="w"> </span><span class="n">empno</span><span class="p">,</span><span class="w"> </span><span class="n">mgr</span><span class="p">,</span><span class="w"> </span><span class="n">job</span><span class="p">,</span><span class="w"> </span><span class="k">LEVEL</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">emp</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">   </span><span class="n">job</span><span class="o">=</span><span class="s1">&#39;PRESIDENT&#39;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">empno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mgr</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="k">ORDER</span><span class="w"> </span><span class="n">SIBLINGS</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">ename</span><span class="p">;</span><span class="w">  </span><span class="c1">--  [NULLS FIRST | LAST]</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+KING 7839 PRESIDENT 1
+  BLAKE 7698 7839 MANAGER 2
+    ALLEN 7499 7698 SALESMAN 3
+    JAMES 7900 7698 CLERK 3
+    MARTIN 7654 7698 SALESMAN 3
+    TURNER 7844 7698 SALESMAN 3
+    WARD 7521 7698 SALESMAN 3
+  CLARK 7782 7839 MANAGER 2
+    MILLER 7934 7782 CLERK 3
+</pre>
+
+<p>We can use aggregation and grouping in these queries.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">-- Example:</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">--------</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1">-- Give the sum money of the grandchildren of KAIN.</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">SELECT</span><span class="w">   </span><span class="k">SUM</span><span class="p">(</span><span class="n">money</span><span class="p">)</span><span class="w"> </span><span class="c1">-- LPAD(&#39; &#39;, 2*(LEVEL-1)) || name, parent, money</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">parentof</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;KAIN&#39;</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+683000
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">-- A new table: ParentOf(name, parent, money, city)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">------------------------------------------------</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">ParentOf</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">money</span><span class="p">,</span><span class="w"> </span><span class="n">city</span><span class="p">)</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">nev</span><span class="p">,</span><span class="w"> </span><span class="n">decode</span><span class="p">(</span><span class="n">apja</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NINCS&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">apja</span><span class="p">),</span><span class="w"> </span><span class="n">vagyon</span><span class="p">,</span><span class="w"> </span><span class="n">varos</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">vagyonok</span><span class="p">;</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1">-- grant select on parentof to public;</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1">-- Compare the following queries and notice the role of PRIOR operator.</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1">-- ABEL&#39;s all descendants</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="k">SELECT</span><span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="k">LEVEL</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">money</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">parentof</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%%&#39;</span><span class="w">     </span><span class="c1">-- we could omit WHERE clause</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ABEL&#39;</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+ABEL ADAM 280000
+  JANOS ABEL 190000
+    PAL JANOS 133000
+    PETER JANOS 143000
+      MARCSA PETER 177000
+    ROBERT JANOS 131000
+  JOZSEF ABEL 150000
+    BELA JOZSEF 157000
+      GIZI BELA 100000
+    BOTOND JOZSEF 190000
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">-- ABEL&#39;s descendants whose all ancestors have a letter &#39;A&#39; in his name</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">SELECT</span><span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="k">LEVEL</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">money</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">parentof</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%%&#39;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ABEL&#39;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">prior</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%A%&#39;</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+ABEL ADAM 280000
+  JANOS ABEL 190000
+    PAL JANOS 133000
+    PETER JANOS 143000
+    ROBERT JANOS 131000
+  JOZSEF ABEL 150000
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">-- ABEL&#39;s descendants who and whose all ancestors have a letter &#39;A&#39; in his name</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">-- No PRIOR in second condition of CONNECT BY</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">SELECT</span><span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="k">LEVEL</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">money</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">parentof</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%%&#39;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ABEL&#39;</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%A%&#39;</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+ABEL ADAM 280000
+  JANOS ABEL 190000
+    PAL JANOS 133000
+</pre>
+
+<h2 id="connect_by_root-operator">CONNECT_BY_ROOT operator</h2>
+<p>At any level we can refer to a column of the root node with this operator.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">-- Example:</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">--------</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1">-- Give the names whose city is the same as ADAM&#39;s city.</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="k">SELECT</span><span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="k">LEVEL</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">CONNECT_BY_ROOT</span><span class="w"> </span><span class="n">city</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">parentof</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONNECT_BY_ROOT</span><span class="w"> </span><span class="n">city</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ADAM&#39;</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+ADAM NO Budapest Budapest
+  ABEL ADAM Budapest Budapest
+      PETER JANOS Budapest Budapest
+        MARCSA PETER Budapest Budapest
+    SAMU BARNA Budapest Budapest
+    BALAZS KAIN Budapest Budapest
+</pre>
+
+<h2 id="sys_connect_by_path-function-sys_connect_by_pathcolumn-char">SYS_CONNECT_BY_PATH function: SYS_CONNECT_BY_PATH(column, char)</h2>
+<p>SYS_CONNECT_BY_PATH concatenates the given column of the nodes from root to actual node.</p>
+<p>Second parameter is the delimeter character (or string).</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">-- Example:</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1">--------</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">SELECT</span><span class="w">  </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">SYS_CONNECT_BY_PATH</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">SYS_CONNECT_BY_PATH</span><span class="p">(</span><span class="n">city</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">FROM</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">parentof</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ADAM&#39;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+ADAM .ADAM .Budapest
+ABEL .ADAM.ABEL .Budapest.Budapest
+JANOS .ADAM.ABEL.JANOS .Budapest.Budapest.Eger
+PAL .ADAM.ABEL.JANOS.PAL .Budapest.Budapest.Eger.Szeged
+PETER .ADAM.ABEL.JANOS.PETER .Budapest.Budapest.Eger.Budapest
+MARCSA .ADAM.ABEL.JANOS.PETER.MARCSA .Budapest.Budapest.Eger.Budapest.Budapest
+ROBERT .ADAM.ABEL.JANOS.ROBERT .Budapest.Budapest.Eger.Eger
+JOZSEF .ADAM.ABEL.JOZSEF .Budapest.Budapest.Szeged
+...
+</pre>
+
+<p>If the graph has a cycle we have to use NOCYCLE keyword.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">-- Our earlier example about flights (The SQL statements below show how I created your table.)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1">---------------------------------</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Flight</span><span class="p">(</span><span class="n">airline</span><span class="p">,</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">cost</span><span class="p">)</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">legitarsasag</span><span class="p">,</span><span class="w"> </span><span class="n">honnan</span><span class="p">,</span><span class="w"> </span><span class="n">hova</span><span class="p">,</span><span class="w"> </span><span class="n">koltseg</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">nikovits</span><span class="p">.</span><span class="n">jaratok</span><span class="p">;</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="k">GRANT</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">public</span><span class="p">;</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1">-- or CREATE an empty table then insert rows:</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Flight</span><span class="p">(</span><span class="n">airline</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w"> </span><span class="n">cost</span><span class="w"> </span><span class="nb">NUMBER</span><span class="p">);</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">);</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">);</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="p">);</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dallas&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;New York&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;New York&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">);</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;Lufthansa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="c1">-- There is a cycle in the graph of Flight table. </span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="c1">-- If we delete the last row, there will be no cycle in the graph.</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">flight</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">orig</span><span class="o">=</span><span class="s1">&#39;Chicago&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;Denver&#39;</span><span class="p">;</span>
+</span></code></pre></div>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">-- Example:</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1">--------</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1">-- Which cities can be reached from San Francisco?</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">*</span><span class="k">level</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">level</span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="n">turnovers</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;San Francisco&#39;</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orig</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+San Francisco Dallas 0
+    Dallas Chicago 1
+        Chicago New York 2
+    Dallas New York 1
+San Francisco Denver 0
+    Denver Chicago 1
+        Chicago New York 2
+    Denver Dallas 1
+        Dallas Chicago 2
+            Chicago New York 3
+        Dallas New York 2
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">-- The previous SELECT doesn&#39;t work if there is a cycle in the graph.</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1">-- Use the following instead (-&gt; NOCYCLE):</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">LPAD</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">*</span><span class="k">level</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">level</span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="n">turnovers</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;San Francisco&#39;</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">NOCYCLE</span><span class="w"> </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orig</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+--------- 
+San Francisco Dallas 0
+    Dallas Chicago 1
+        Chicago New York 2
+    Dallas New York 1
+San Francisco Denver 0
+    Denver Chicago 1
+        Chicago New York 2
+    Denver Dallas 1
+        Dallas Chicago 2
+            Chicago New York 3
+        Dallas New York 2
+</pre>
+
+<h2 id="other-pszeudo-columns">Other pszeudo columns</h2>
+<ul>
+<li>CONNECT_BY_ISCYCLE: returns 1 if actual row has a child that is an ancestor of it too. (So, it would mean a cycle.)</li>
+<li>CONNECT_BY_ISLEAF:  returns 1 if actual row has no child. (or has only child that was an ancestor)</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">-- Example:</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1">--------</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1">-- List the routes from San Francisco.</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">CONNECT_BY_ROOT</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">first</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">final_dest</span><span class="p">,</span><span class="w"> </span><span class="k">LEVEL</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">       </span><span class="n">SYS_CONNECT_BY_PATH</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&gt;&#39;</span><span class="p">)</span><span class="o">||</span><span class="s1">&#39;-&gt;&#39;</span><span class="o">||</span><span class="n">dest</span><span class="w"> </span><span class="ss">&quot;route&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1">-- we concatenate the final dest at the end</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">       </span><span class="n">CONNECT_BY_ISCYCLE</span><span class="p">,</span><span class="w"> </span><span class="n">CONNECT_BY_ISLEAF</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span><span class="w">                                                       </span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">orig</span><span class="o">=</span><span class="s1">&#39;San Francisco&#39;</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">NOCYCLE</span><span class="w"> </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orig</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">LEVEL</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+San Francisco Dallas 1 ->San Francisco->Dallas 0 0
+San Francisco Denver 1 ->San Francisco->Denver 0 0
+San Francisco New York 2 ->San Francisco->Dallas->New York 0 1
+San Francisco Chicago 2 ->San Francisco->Dallas->Chicago 0 0
+San Francisco Chicago 2 ->San Francisco->Denver->Chicago 0 0
+San Francisco Dallas 2 ->San Francisco->Denver->Dallas 0 0
+San Francisco New York 3 ->San Francisco->Denver->Chicago->New York 0 1
+</pre>
+
+<p>Let's see our earlier query based on a Datalog query</p>
+<p>Reaches(X,Y)  &lt;--  Flight(X,Y)</p>
+<p>Reaches(X,Y)  &lt;--  Flight(X,Z) AND Reaches(Z,Y) AND X &lt;&gt; Y</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">-- SQL query</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1">---------</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">WITH</span><span class="w">  </span><span class="n">reaches</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">   </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span><span class="p">,</span><span class="w"> </span><span class="n">reaches</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">flight</span><span class="p">.</span><span class="n">orig</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">reaches</span><span class="p">.</span><span class="n">dest</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">  </span><span class="p">)</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span><span class="k">CYCLE</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="w"> </span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="k">SELECT</span><span class="w">  </span><span class="k">distinct</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">reaches</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+Chicago New York
+Dallas Chicago
+Dallas New York
+Denver Chicago
+Denver Dallas
+Denver New York
+San Francisco Chicago
+San Francisco Dallas
+San Francisco Denver
+San Francisco New York
+</pre>
+
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">-- Create the Reaches table from Flight table with a CONNECT BY query</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1">------------------------------------------------------------------</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">CONNECT_BY_ROOT</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">dest</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="k">FROM</span><span class="w"> </span><span class="n">flight</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">CONNECT_BY_ROOT</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">dest</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="k">START</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span><span class="w">                         </span><span class="c1">-- we start recursion from each node</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="k">CONNECT</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">NOCYCLE</span><span class="w"> </span><span class="k">PRIOR</span><span class="w"> </span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orig</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">orig</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">;</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="c1">-- With recursive statement &#39;WITH&#39; we can compute (produce) new values, but with</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="c1">-- &#39;CONNECT BY&#39; we can get only existing values from our table.</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="c1">-- The query below couldn&#39;t be produced by a &#39;CONNECT BY&#39; recursive query, e.g.</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+Chicago New York
+Dallas Chicago
+Dallas New York
+Denver Chicago
+Denver Dallas
+Denver New York
+San Francisco Chicago
+San Francisco Dallas
+San Francisco Denver
+San Francisco New York
+</pre>
+
+<h2 id="produce-a-relation-factorialn-val-where-val-n">Produce a relation Factorial(n, val) where val = n!</h2>
+<p>Factor(X, Y) &lt;-- X=0 AND Y=1</p>
+<p>Factor(X, Y) &lt;-- Factor(Z, V) AND X=Z+1 AND Y=X*V AND X &lt; 40    </p>
+<p>(--&gt; X &lt; 40: not to produce an infinite relation, see "safety" of a DATALOG rule)</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">WITH</span><span class="w">  </span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">   </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">val</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">factorial</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">40</span><span class="w">                          </span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="p">)</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">  </span><span class="k">CYCLE</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">is_cycle</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="w">   </span><span class="c1">-- we can omit this line, there is no cycle</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="k">SELECT</span><span class="w">  </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">factorial</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></div>
+<pre>
+Results:
+---------
+0 1
+1 1
+2 2
+3 6
+4 24
+5 120
+6 720
+7 5040
+8 40320
+9 362880
+10 3628800
+11 39916800
+...
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Holicza Barnabás & ELTE
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

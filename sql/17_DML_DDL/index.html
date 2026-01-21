@@ -1,0 +1,2704 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../16_With/">
+      
+      
+        <link rel="next" href="../18_Views/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>DML and DDL - ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-manipulation-language-dml-in-sql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" class="md-header__button md-logo" aria-label="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" data-md-component="logo">
+      
+  <img src="../../assets/database.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DML and DDL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../topics/" class="md-tabs__link">
+          
+  
+  
+  Practice Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01_Introduction/" class="md-tabs__link">
+          
+  
+  
+  SQL Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pl_sql/01_PL_SQL_basics/" class="md-tabs__link">
+          
+  
+  
+  PL/SQL Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../pl_sql_optimization/none/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PL/SQL Optimization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../advanced_pl_sql/none/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Advanced PL/SQL
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" class="md-nav__button md-logo" aria-label="ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES" data-md-component="logo">
+      
+  <img src="../../assets/database.png" alt="logo">
+
+    </a>
+    ELTE DATABASES I. AND II. CLASSES PRACTICE NOTES
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practice Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practice Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB1 Practice Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB2 Practice Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_Basic_sql_statements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic SQL Statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_Set_operator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_Data_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_Sql_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_Character_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Character Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_Number_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Number Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_Date_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_Conversion_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conversion Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_Other_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Other Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_Conditional_expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditional Expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_Group_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Group Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_Group_by/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Group By
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_Joins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Joins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_Subqueries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subqueries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_With/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    With
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DML and DDL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DML and DDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-manipulation-language-dml-in-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Manipulation Language (DML) in SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-new-row-to-a-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding a New Row to a Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insert-statement-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INSERT Statement Syntax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inserting-new-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inserting New Rows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inserting-rows-with-null-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inserting Rows with NULL Values
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implicit-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implicit Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicit-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explicit Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copying-rows-from-another-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copying Rows from Another Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-data-in-a-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing Data in a Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-statement-syntax-in-oracle-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UPDATE Statement Syntax in Oracle SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-two-columns-with-a-subquery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating Two Columns with a Subquery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#removing-a-row-from-a-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing a Row from a Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-statement-in-oracle-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DELETE Statement in Oracle SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deleting-rows-based-on-another-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting Rows Based on Another Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#truncate-statement-in-oracle-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TRUNCATE Statement in Oracle SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-a-subquery-in-an-insert-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using a Subquery in an INSERT Statement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Transactions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-transactions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Transactions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advantages-of-commit-and-rollback-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advantages of COMMIT and ROLLBACK Statements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controlling Transactions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rolling-back-changes-to-a-marker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling Back Changes to a Marker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implicit-transaction-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implicit Transaction Processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-of-the-data-before-commit-or-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State of the Data Before COMMIT or ROLLBACK
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-of-the-data-after-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State of the Data After COMMIT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#committing-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Committing Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-of-the-data-after-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State of the Data After ROLLBACK
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-of-the-data-after-rollback_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State of the Data After ROLLBACK
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statement-level-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statement-Level Rollback
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read Consistency
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-rules-for-database-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Naming Rules for Database Objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-table-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CREATE TABLE Statement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencing-another-users-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencing Another User's Tables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DEFAULT Option
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Tables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#date-and-interval-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Date and Interval Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datetime-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Datetime Data Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interval-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interval Data Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interval-year-to-month" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INTERVAL YEAR TO MONTH
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interval-day-to-second" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INTERVAL DAY TO SECOND
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#including-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Including Constraints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valid-constraint-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid Constraint Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraint-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint Guidelines
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defining-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining Constraints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-null-constraint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NOT NULL Constraint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unique-constraint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UNIQUE Constraint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primary-key-constraint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PRIMARY KEY Constraint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreign-key-constraint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FOREIGN KEY Constraint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreign-key-constraint-keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FOREIGN KEY Constraint: Keywords
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-constraint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CHECK Constraint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#violating-constraints-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violating Constraints 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#violating-constraints-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violating Constraints 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-table-by-using-a-subquery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a Table by Using a Subquery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-table-by-using-a-subquery_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a Table by Using a Subquery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alter-table-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ALTER TABLE Statement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dropping-a-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dropping a Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_Views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_Relational_algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational Algebra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PL/SQL Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/01_PL_SQL_basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/02_Cursors_and_collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cursors and Collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/03_Exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql/04_Recurson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pl_sql_optimization/none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PL/SQL Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced_pl_sql/none/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced PL/SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>DML and DDL</h1>
+
+<h2 id="data-manipulation-language-dml-in-sql">Data Manipulation Language (DML) in SQL</h2>
+<ul>
+<li>
+<p>A <strong>DML statement</strong> is executed when you:</p>
+<ul>
+<li>Add new rows to a table</li>
+<li>Modify existing rows in a table</li>
+<li>Remove existing rows from a table</li>
+</ul>
+</li>
+<li>
+<p>A <strong>transaction</strong> consists of a collection of DML statements that form a <strong>logical unit of work</strong>.</p>
+</li>
+</ul>
+<h2 id="adding-a-new-row-to-a-table">Adding a New Row to a Table</h2>
+<p><img alt="alt text" src="../../assets/P5/newrow.png" width="700" /></p>
+<h2 id="insert-statement-syntax">INSERT Statement Syntax</h2>
+<ul>
+<li>Add new rows to a table by using the <strong>INSERT</strong> statement.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="p">[(</span><span class="k">column</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">column</span><span class="p">...])]</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">value</span><span class="p">...]);</span>
+</span></code></pre></div>
+<p>With this syntax, only one row is inserted at a time.</p>
+<h2 id="inserting-new-rows">Inserting New Rows</h2>
+<ul>
+<li>Insert a new row containing values for each column.</li>
+<li>List values in the <strong>default order</strong> of the columns in the table.</li>
+<li>Optionally, list the columns explicitly in the <code>INSERT</code> clause.</li>
+<li>Enclose character and date values in <strong>single quotation marks</strong>.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">departments</span><span class="w"> </span><span class="p">(</span><span class="n">department_id</span><span class="p">,</span><span class="w"> </span><span class="n">department_name</span><span class="p">,</span><span class="w"> </span><span class="n">manager_id</span><span class="p">,</span><span class="w"> </span><span class="n">location_id</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Public Relations&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1700</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="inserting-rows-with-null-values">Inserting Rows with NULL Values</h2>
+<h2 id="implicit-method">Implicit Method</h2>
+<ul>
+<li>Omit the column from the column list.</li>
+<li>The omitted column(s) will receive <strong>NULL</strong> (or default value if defined).</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">departments</span><span class="w"> </span><span class="p">(</span><span class="n">department_id</span><span class="p">,</span><span class="w"> </span><span class="n">department_name</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Purchasing&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="explicit-method">Explicit Method</h2>
+<ul>
+<li>Specify the NULL keyword in the VALUES clause.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">departments</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="copying-rows-from-another-table">Copying Rows from Another Table</h2>
+<ul>
+<li>Write your <strong>INSERT</strong> statement with a <strong>subquery</strong>.</li>
+<li><strong>Do not use</strong> the <code>VALUES</code> clause.</li>
+<li>Match the number of columns in the <code>INSERT</code> clause to those in the subquery.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">target_table</span><span class="w"> </span><span class="p">[(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...)]</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">FROM</span><span class="w"> </span><span class="n">source_table</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">[</span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">];</span>
+</span></code></pre></div>
+<h2 id="changing-data-in-a-table">Changing Data in a Table</h2>
+<p><img alt="alt text" src="../../assets/P5/change.png" width="700" /></p>
+<h2 id="update-statement-syntax-in-oracle-sql">UPDATE Statement Syntax in Oracle SQL</h2>
+<ul>
+<li>Modify existing rows with the <strong>UPDATE</strong> statement.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="k">table</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">SET</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="p">...]</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">[</span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">];</span>
+</span></code></pre></div>
+<ul>
+<li>
+<p>Update more than one row at a time (if required).</p>
+</li>
+<li>
+<p>Specific row or rows are modified if you specify the WHERE clause.</p>
+</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">SET</span><span class="w"> </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">70</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">employee_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">113</span><span class="p">;</span>
+</span></code></pre></div>
+<ul>
+<li>All rows in the table are modified if you omit the WHERE clause.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">copy_emp</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">SET</span><span class="w"> </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">110</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="updating-two-columns-with-a-subquery">Updating Two Columns with a Subquery</h2>
+<p>Update employee 114's <strong>job</strong> and <strong>salary</strong> to match that of employee 205.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">SET</span><span class="w"> </span><span class="n">job_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">job_id</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">              </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">              </span><span class="k">WHERE</span><span class="w"> </span><span class="n">employee_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">205</span><span class="p">),</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">salary</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">              </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">              </span><span class="k">WHERE</span><span class="w"> </span><span class="n">employee_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">205</span><span class="p">)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">employee_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">114</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="removing-a-row-from-a-table">Removing a Row from a Table</h2>
+<p><img alt="alt text" src="../../assets/P5/remove.png" width="700" /></p>
+<h2 id="delete-statement-in-oracle-sql">DELETE Statement in Oracle SQL</h2>
+<ul>
+<li>You can remove existing rows from a table by using the <strong>DELETE</strong> statement.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="p">[</span><span class="k">FROM</span><span class="p">]</span><span class="w"> </span><span class="k">table</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">[</span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">];</span>
+</span></code></pre></div>
+<ul>
+<li>Specific rows are deleted if you specify the WHERE clause.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">departments</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">department_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Finance&#39;</span><span class="p">;</span>
+</span></code></pre></div>
+<ul>
+<li>All rows in the table are deleted if you omit the WHERE clause.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">copy_emp</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="deleting-rows-based-on-another-table">Deleting Rows Based on Another Table</h2>
+<ul>
+<li>Use <strong>subqueries</strong> in <code>DELETE</code> statements to remove rows from a table based on values from another table.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">department_id</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">     </span><span class="k">FROM</span><span class="w"> </span><span class="n">departments</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">     </span><span class="k">WHERE</span><span class="w"> </span><span class="n">department_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Public%&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="truncate-statement-in-oracle-sql">TRUNCATE Statement in Oracle SQL</h2>
+<ul>
+<li>Removes <strong>all rows</strong> from a table, leaving the table <strong>empty</strong> and the <strong>table structure</strong> intact.</li>
+<li>Is a <strong>data definition language (DDL)</strong> statement rather than a DML statement.</li>
+<li><strong>Cannot easily be undone</strong> (implicit commit — no ROLLBACK possible).</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">TRUNCATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+</span></code></pre></div>
+<p>Example:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">TRUNCATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">copy_emp</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="using-a-subquery-in-an-insert-statement">Using a Subquery in an INSERT Statement</h2>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">hire_date</span><span class="p">,</span><span class="w"> </span><span class="n">job_id</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="p">,</span><span class="w"> </span><span class="n">department_id</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">     </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">     </span><span class="k">WHERE</span><span class="w"> </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">99999</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DTAYLOR&#39;</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">       </span><span class="n">TO_DATE</span><span class="p">(</span><span class="s1">&#39;07-Jun-99&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DD-MON-RR&#39;</span><span class="p">),</span><span class="w"> </span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">       </span><span class="s1">&#39;ST_CLERK&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Verify the results:</p>
+<p><img alt="alt text" src="../../assets/P5/verify.png" width="700" /></p>
+<h2 id="database-transactions">Database Transactions</h2>
+<ul>
+<li>A <strong>database transaction</strong> consists of one of the following:<ul>
+<li><strong>DML statements</strong> that constitute one consistent change to the data</li>
+<li><strong>One DDL statement</strong></li>
+<li><strong>One data control language (DCL) statement</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="database-transactions_1">Database Transactions</h2>
+<ul>
+<li>Begins when the <strong>first DML SQL statement</strong> is executed.</li>
+<li>A transaction ends with one of the following events:<ul>
+<li>A <strong>COMMIT</strong> or <strong>ROLLBACK</strong> statement is issued.</li>
+<li>A <strong>DDL</strong> or <strong>DCL</strong> statement executes (automatic commit).</li>
+<li>The user exits SQL*Developer (or tool) normally (implicit commit in many tools).</li>
+<li>The system crashes (changes lost — rollback on restart).</li>
+</ul>
+</li>
+</ul>
+<h2 id="advantages-of-commit-and-rollback-statements">Advantages of COMMIT and ROLLBACK Statements</h2>
+<p>With <strong>COMMIT</strong> and <strong>ROLLBACK</strong> statements, you can:</p>
+<div class="language-text highlight"><pre><span></span><code>- **Ensure data consistency**  
+All changes in a transaction succeed together or are undone completely (atomicity).
+
+- **Preview data changes before making changes permanent**  
+Execute DML statements, query the results, and decide whether to commit or rollback.
+
+- **Group logically related operations**  
+Treat multiple DML statements as a single logical unit of work.
+</code></pre></div>
+<h2 id="controlling-transactions">Controlling Transactions</h2>
+<p><img alt="alt text" src="../../assets/P5/control.png" width="700" /></p>
+<h2 id="rolling-back-changes-to-a-marker">Rolling Back Changes to a Marker</h2>
+<ul>
+<li>Create a <strong>marker</strong> in a current transaction by using the <strong>SAVEPOINT</strong> statement.</li>
+<li>Roll back to that marker by using the <strong>ROLLBACK TO SAVEPOINT</strong> statement.</li>
+</ul>
+<p><img alt="alt text" src="../../assets/P5/roll.png" width="700" /></p>
+<h2 id="implicit-transaction-processing">Implicit Transaction Processing</h2>
+<ul>
+<li>
+<p>An <strong>automatic commit</strong> occurs under the following circumstances:</p>
+<ul>
+<li>DDL statement is issued</li>
+<li>DCL statement is issued</li>
+<li>Normal exit from SQL Developer, without explicitly issuing COMMIT or ROLLBACK statements</li>
+</ul>
+</li>
+<li>
+<p>An <strong>automatic rollback</strong> occurs under an <strong>abnormal termination</strong> of SQL Developer or a <strong>system failure</strong>.</p>
+</li>
+</ul>
+<h2 id="state-of-the-data-before-commit-or-rollback">State of the Data Before COMMIT or ROLLBACK</h2>
+<ul>
+<li>The <strong>previous state</strong> of the data can be recovered.</li>
+<li>The current user can review the results of the DML operations by using the <strong>SELECT</strong> statement.</li>
+<li><strong>Other users</strong> cannot view the results of the DML statements by the current user.</li>
+<li>The affected <strong>rows are locked</strong>; other users cannot change the data in the affected rows.</li>
+</ul>
+<h2 id="state-of-the-data-after-commit">State of the Data After COMMIT</h2>
+<p>After issuing a <strong>COMMIT</strong>:</p>
+<ul>
+<li>Data changes are made <strong>permanent</strong> in the database.</li>
+<li>The <strong>previous state</strong> of the data is <strong>permanently lost</strong>.</li>
+<li><strong>All users</strong> can view the results.</li>
+<li>Locks on the affected rows are <strong>released</strong>; those rows are available for other users to manipulate.</li>
+<li><strong>All savepoints</strong> are erased.</li>
+</ul>
+<h2 id="committing-data">Committing Data</h2>
+<p>Step 1: Make the Changes</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">employee_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">99999</span><span class="p">;</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">departments</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">290</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Corporate Tax&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">1700</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Step 2: Commit the Changes</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">COMMIT</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="state-of-the-data-after-rollback">State of the Data After ROLLBACK</h2>
+<ul>
+<li>Discard all pending changes by using the <strong>ROLLBACK</strong> statement:<ul>
+<li>Data changes are <strong>undone</strong>.</li>
+<li>Previous state of the data is <strong>restored</strong>.</li>
+<li>Locks on the affected rows are <strong>released</strong>.</li>
+</ul>
+</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">copy_emp</span><span class="p">;</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1">-- 22 rows deleted.</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">ROLLBACK</span><span class="p">;</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1">-- Rollback complete.</span>
+</span></code></pre></div>
+<h2 id="state-of-the-data-after-rollback_1">State of the Data After ROLLBACK</h2>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">               </span><span class="c1">-- ups!, it&#39;s a mistake</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1">-- 25,000 rows deleted.</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">ROLLBACK</span><span class="p">;</span><span class="w">                       </span><span class="c1">-- correct the mistake</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="c1">-- Rollback complete.</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w">  </span><span class="c1">-- it&#39;s ok</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="c1">-- 1 row deleted.</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="c1">-- No rows selected.  (row successfully removed)</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="k">COMMIT</span><span class="p">;</span><span class="w">                           </span><span class="c1">-- make it permanent</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="c1">-- Commit complete.</span>
+</span></code></pre></div>
+<h2 id="statement-level-rollback">Statement-Level Rollback</h2>
+<ul>
+<li>If a <strong>single DML statement</strong> fails during execution, <strong>only that statement</strong> is rolled back.</li>
+<li>The Oracle server implements an <strong>implicit savepoint</strong>.</li>
+<li><strong>All other changes</strong> (previous successful statements in the transaction) are <strong>retained</strong>.</li>
+<li>The user should terminate transactions <strong>explicitly</strong> by executing a <strong>COMMIT</strong> or <strong>ROLLBACK</strong> statement.</li>
+</ul>
+<h2 id="read-consistency">Read Consistency</h2>
+<ul>
+<li><strong>Read consistency</strong> guarantees a <strong>consistent view</strong> of the data at all times.</li>
+<li>Changes made by one user do <strong>not conflict</strong> with changes made by another user.</li>
+<li>Read consistency ensures that on the same data:<ul>
+<li><strong>Readers do not wait</strong> for writers</li>
+<li><strong>Writers do not wait</strong> for readers</li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../../assets/P5/read.png" width="700" /></p>
+<h2 id="database-objects">Database Objects</h2>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table</td>
+<td>Basic unit of storage; composed of rows and columns</td>
+</tr>
+<tr>
+<td>View</td>
+<td>Logically represents subsets of data from one or more tables</td>
+</tr>
+<tr>
+<td>Sequence</td>
+<td>Generates numeric values (e.g., for auto-incrementing IDs)</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>Improves the performance of some queries</td>
+</tr>
+<tr>
+<td>Synonym</td>
+<td>Gives alternative names to objects</td>
+</tr>
+</tbody>
+</table>
+<h2 id="naming-rules-for-database-objects">Naming Rules for Database Objects</h2>
+<ul>
+<li><strong>Must begin with a letter</strong> (A–Z or a–z).</li>
+<li><strong>Must be 1–30 characters long</strong> (Oracle 12.2 and later: up to 128 bytes for most objects).</li>
+<li><strong>Must contain only</strong>:<ul>
+<li>Alphanumeric characters (A–Z, a–z, 0–9)</li>
+<li>Underscore (<code>_</code>)</li>
+<li>Dollar sign (<code>$</code>)</li>
+<li>Pound sign (<code>#</code>)</li>
+</ul>
+</li>
+<li><strong>Must not duplicate</strong> the name of another object owned by the same user.</li>
+<li><strong>Must not be</strong> an Oracle server <strong>reserved word</strong> (e.g., SELECT, TABLE, FROM).</li>
+</ul>
+<h2 id="create-table-statement">CREATE TABLE Statement</h2>
+<p>You must have:</p>
+<ul>
+<li><strong>CREATE TABLE</strong> privilege</li>
+<li>A <strong>storage area</strong> (quota in a tablespace)</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="k">schema</span><span class="p">.]</span><span class="k">table</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="p">(</span><span class="k">column</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="p">[</span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">expr</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="p">...]);</span>
+</span></code></pre></div>
+<p>What You Specify
+- Table name
+- Column name, column data type, and column size</p>
+<h2 id="referencing-another-users-tables">Referencing Another User's Tables</h2>
+<ul>
+<li>Tables belonging to other users are <strong>not</strong> in the user's schema.</li>
+<li>You should use the <strong>owner's name</strong> as a <strong>prefix</strong> to those tables.</li>
+</ul>
+<p>This is called <strong>schema-qualified</strong> table reference.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">schema_name</span><span class="p">.</span><span class="k">table_name</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="default-option">DEFAULT Option</h2>
+<ul>
+<li>Specify a <strong>default value</strong> for a column during an <strong>INSERT</strong>.</li>
+<li>If no value is provided for the column in the INSERT, the default is used automatically.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">column_name</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">expression</span>
+</span></code></pre></div>
+<ul>
+<li>Literal values, expressions, or SQL functions are legal values.</li>
+<li>Another column's name or a pseudocolumn are illegal values.</li>
+<li>The default data type must match the column data type (Oracle performs implicit conversion if possible).</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">hire_dates</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="p">(</span><span class="n">id</span><span class="w">          </span><span class="nb">NUMBER</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">     </span><span class="n">hire_date</span><span class="w">   </span><span class="nb">DATE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">SYSDATE</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="creating-tables">Creating Tables</h2>
+<p>Create the Table</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">dept</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="p">(</span><span class="n">deptno</span><span class="w">      </span><span class="nb">NUMBER</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">     </span><span class="n">dname</span><span class="w">       </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">14</span><span class="p">),</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">     </span><span class="n">loc</span><span class="w">         </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">13</span><span class="p">),</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">     </span><span class="n">create_date</span><span class="w"> </span><span class="nb">DATE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">SYSDATE</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Confirm Table Creation</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">DESCRIBE</span><span class="w"> </span><span class="n">dept</span><span class="p">;</span><span class="w"> </span><span class="c1">-- not SQL Statement</span>
+</span></code></pre></div>
+<p><img alt="alt text" src="../../assets/P5/desc.png" width="700" /></p>
+<h2 id="data-types">Data Types</h2>
+<p>Oracle provides a variety of data types to store different kinds of information efficiently.</p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VARCHAR2(size)</td>
+<td>Variable-length character data (up to 4000 bytes; size in bytes or characters)</td>
+</tr>
+<tr>
+<td>CHAR(size)</td>
+<td>Fixed-length character data (padded with spaces; up to 2000 bytes)</td>
+</tr>
+<tr>
+<td>NUMBER(p, s)</td>
+<td>Variable-length numeric data (p = precision, s = scale)</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>Date and time values (century to seconds)</td>
+</tr>
+<tr>
+<td>LONG</td>
+<td>Variable-length character data (up to 2 GB) — deprecated</td>
+</tr>
+<tr>
+<td>CLOB</td>
+<td>Character large object (up to 4 GB)</td>
+</tr>
+<tr>
+<td>RAW and LONG RAW</td>
+<td>Raw binary data (deprecated)</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>Binary large object (up to 4 GB)</td>
+</tr>
+<tr>
+<td>BFILE</td>
+<td>Binary data stored in an external file (up to 4 GB)</td>
+</tr>
+<tr>
+<td>ROWID</td>
+<td>A base-64 number system representing the unique address of a row in its table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="date-and-interval-types">Date and Interval Types</h2>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TIMESTAMP</td>
+<td>Date with fractional seconds</td>
+</tr>
+<tr>
+<td>INTERVAL YEAR TO MONTH</td>
+<td>Stored as an interval of years and months</td>
+</tr>
+<tr>
+<td>INTERVAL DAY TO SECOND</td>
+<td>Stored as an interval of days, hours, minutes, and seconds</td>
+</tr>
+</tbody>
+</table>
+<h2 id="datetime-data-types">Datetime Data Types</h2>
+<ul>
+<li>The <strong>TIMESTAMP</strong> data type is an extension of the <strong>DATE</strong> data type.</li>
+<li>It stores the year, month, and day of the <strong>DATE</strong> data type plus <strong>hour, minute, and second</strong> values as well as the <strong>fractional second</strong> value.</li>
+<li>You can optionally specify the <strong>time zone</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TIMESTAMP [(fractional_seconds_precision)]</td>
+<td>Stores date, time, and fractional seconds (precision 0–9, default 6)</td>
+</tr>
+<tr>
+<td>TIMESTAMP [(fractional_seconds_precision)] WITH TIME ZONE</td>
+<td>Includes time zone offset (e.g., +05:30) or time zone region name</td>
+</tr>
+<tr>
+<td>TIMESTAMP [(fractional_seconds_precision)] WITH LOCAL TIME ZONE</td>
+<td>Stores in database time zone, automatically converts to user’s local time zone on retrieval</td>
+</tr>
+</tbody>
+</table>
+<h2 id="interval-data-types">Interval Data Types</h2>
+<p>Oracle provides <strong>interval</strong> data types to store periods of time.</p>
+<h2 id="interval-year-to-month">INTERVAL YEAR TO MONTH</h2>
+<ul>
+<li>Stores a period of time using the <strong>YEAR</strong> and <strong>MONTH</strong> datetime fields.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nb">INTERVAL</span><span class="w"> </span><span class="k">YEAR</span><span class="w"> </span><span class="p">[(</span><span class="n">year_precision</span><span class="p">)]</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">MONTH</span>
+</span></code></pre></div>
+<h2 id="interval-day-to-second">INTERVAL DAY TO SECOND</h2>
+<ul>
+<li>Stores a period of time in terms of days, hours, minutes, and seconds.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nb">INTERVAL</span><span class="w"> </span><span class="k">DAY</span><span class="w"> </span><span class="p">[(</span><span class="n">day_precision</span><span class="p">)]</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">SECOND</span><span class="w"> </span><span class="p">[(</span><span class="n">fractional_seconds_precision</span><span class="p">)]</span>
+</span></code></pre></div>
+<h2 id="including-constraints">Including Constraints</h2>
+<ul>
+<li><strong>Constraints</strong> enforce rules at the <strong>table level</strong>.</li>
+<li>Constraints <strong>prevent the deletion</strong> of a table if there are dependencies.</li>
+<li>They ensure <strong>data integrity</strong> by restricting what data can be inserted, updated, or deleted.</li>
+</ul>
+<h2 id="valid-constraint-types">Valid Constraint Types</h2>
+<table>
+<thead>
+<tr>
+<th>Constraint Type</th>
+<th>Description</th>
+<th>Example Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NOT NULL</td>
+<td>Column cannot contain NULL values</td>
+<td>email, last_name</td>
+</tr>
+<tr>
+<td>UNIQUE</td>
+<td>All values in the column (or combination) must be unique</td>
+<td>employee_id (if not PK), email</td>
+</tr>
+<tr>
+<td>PRIMARY KEY</td>
+<td>Combines NOT NULL + UNIQUE; uniquely identifies each row</td>
+<td>employee_id, dept_id</td>
+</tr>
+<tr>
+<td>FOREIGN KEY</td>
+<td>Enforces referential integrity — value must exist in referenced table/key</td>
+<td>department_id references departments(dept_id)</td>
+</tr>
+<tr>
+<td>CHECK</td>
+<td>Ensures column value satisfies a specific condition</td>
+<td>salary &gt; 0, job_id IN ('SA_REP','IT_PROG')</td>
+</tr>
+</tbody>
+</table>
+<h2 id="constraint-guidelines">Constraint Guidelines</h2>
+<ul>
+<li>You can <strong>name a constraint</strong>, or the Oracle server generates a name by using the <strong>SYS_Cn</strong> format.</li>
+<li>Create a constraint at either of the following times:<ul>
+<li>At the <strong>same time</strong> as the table is created</li>
+<li><strong>After</strong> the table has been created</li>
+</ul>
+</li>
+<li>Define a constraint at the <strong>column</strong> or <strong>table</strong> level.</li>
+<li>View a constraint in the <strong>data dictionary</strong>.</li>
+</ul>
+<h2 id="defining-constraints">Defining Constraints</h2>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="k">schema</span><span class="p">.]</span><span class="k">table</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="p">(</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span><span class="k">column</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="p">[</span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">expr</span><span class="p">]</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">        </span><span class="p">[</span><span class="n">column_constraint</span><span class="p">],</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">    </span><span class="p">...</span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="p">[</span><span class="n">table_constraint</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="p">...]</span>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="p">);</span>
+</span></code></pre></div>
+<p>Column-Level Constraint</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">column</span><span class="w"> </span><span class="p">[</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="k">constraint_name</span><span class="p">]</span><span class="w"> </span><span class="n">constraint_type</span>
+</span></code></pre></div>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">    </span><span class="n">employee_id</span><span class="w"> </span><span class="nb">NUMBER</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">        </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">emp_emp_id_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="n">first_name</span><span class="w">  </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">    </span><span class="p">...</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="p">);</span>
+</span></code></pre></div>
+<p>Table-Level Constraint</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">[</span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="k">constraint_name</span><span class="p">]</span><span class="w"> </span><span class="n">constraint_type</span><span class="w"> </span><span class="p">(</span><span class="k">column</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="p">...])</span>
+</span></code></pre></div>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">    </span><span class="n">employee_id</span><span class="w"> </span><span class="nb">NUMBER</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="w">    </span><span class="n">first_name</span><span class="w">  </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="w">    </span><span class="p">...</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="w">    </span><span class="n">job_id</span><span class="w">      </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">emp_emp_id_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">employee_id</span><span class="p">)</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="not-null-constraint">NOT NULL Constraint</h2>
+<ul>
+<li>Ensures that null values are not permitted for the column.</li>
+</ul>
+<p><img alt="alt text" src="../../assets/P5/notnull.png" width="700" /></p>
+<h2 id="unique-constraint">UNIQUE Constraint</h2>
+<p><img alt="alt text" src="../../assets/P5/unique.png" width="700" /></p>
+<h2 id="primary-key-constraint">PRIMARY KEY Constraint</h2>
+<p><img alt="alt text" src="../../assets/P5/primary.png" width="700" /></p>
+<h2 id="foreign-key-constraint">FOREIGN KEY Constraint</h2>
+<p><img alt="alt text" src="../../assets/P5/foreign.png" width="700" /></p>
+<h2 id="foreign-key-constraint-keywords">FOREIGN KEY Constraint: Keywords</h2>
+<ul>
+<li><strong>FOREIGN KEY</strong>: Defines the column in the child table at the table-constraint level</li>
+<li><strong>REFERENCES</strong>: Identifies the table and column in the parent table</li>
+<li><strong>ON DELETE CASCADE</strong>: Deletes the dependent rows in the child table when a row in the parent table is deleted</li>
+<li><strong>ON DELETE SET NULL</strong>: Converts dependent foreign key values to null</li>
+</ul>
+<h2 id="check-constraint">CHECK Constraint</h2>
+<ul>
+<li>Defines a condition that each row must satisfy</li>
+<li>The following expressions are not allowed:<ul>
+<li>References to CURRVAL, NEXTVAL, LEVEL, and ROWNUM pseudocolumns</li>
+<li>Calls to SYSDATE, UID, USER, and USERENV functions</li>
+<li>Queries that refer to other values in other rows</li>
+</ul>
+</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="p">...,</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="nb">NUMBER</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">emp_salary_min</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">salary</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="p">...</span>
+</span></code></pre></div>
+<h2 id="violating-constraints-1">Violating Constraints 1</h2>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="k">SET</span><span class="w">    </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">55</span>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="k">WHERE</span><span class="w">  </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">110</span><span class="p">;</span>
+</span></code></pre></div>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">employees</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="o">*</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="n">ERROR</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="n">ORA</span><span class="o">-</span><span class="mi">02291</span><span class="p">:</span><span class="w"> </span><span class="n">integrity</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="p">(</span><span class="n">HR</span><span class="p">.</span><span class="n">EMP_DEPT_FK</span><span class="p">)</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="n">violated</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">found</span>
+</span></code></pre></div>
+<p>Department 55 does not exist.</p>
+<h2 id="violating-constraints-2">Violating Constraints 2</h2>
+<ul>
+<li>You cannot delete a row that contains a <strong>primary key</strong> that is <strong>used as a foreign key</strong> in</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">departments</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="k">WHERE</span><span class="w">  </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+</span></code></pre></div>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">departments</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="o">*</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="n">ERROR</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="n">ORA</span><span class="o">-</span><span class="mi">02292</span><span class="p">:</span><span class="w"> </span><span class="n">integrity</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="p">(</span><span class="n">HR</span><span class="p">.</span><span class="n">EMP_DEPT_FK</span><span class="p">)</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="n">violated</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="k">found</span>
+</span></code></pre></div>
+<h2 id="creating-a-table-by-using-a-subquery">Creating a Table by Using a Subquery</h2>
+<ul>
+<li>Create a table and insert rows by combining the <code>CREATE TABLE</code> statement and the <code>AS subquery</code> option.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">    </span><span class="p">[(</span><span class="k">column</span><span class="p">,</span><span class="w"> </span><span class="k">column</span><span class="p">...)]</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="k">AS</span><span class="w"> </span><span class="n">subquery</span><span class="p">;</span>
+</span></code></pre></div>
+<ul>
+<li>Match the number of specified columns to the number of subquery columns.</li>
+<li>Define columns with column names and default values.</li>
+</ul>
+<h2 id="creating-a-table-by-using-a-subquery_1">Creating a Table by Using a Subquery</h2>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">dept80</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="k">AS</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="k">SELECT</span><span class="w">  </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">,</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="w">            </span><span class="n">salary</span><span class="o">*</span><span class="mi">12</span><span class="w"> </span><span class="n">ANNSAL</span><span class="p">,</span>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="w">            </span><span class="n">hire_date</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="w">    </span><span class="k">FROM</span><span class="w">    </span><span class="n">employees</span>
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="w">    </span><span class="k">WHERE</span><span class="w">   </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="alter-table-statement">ALTER TABLE Statement</h2>
+<ul>
+<li>Use the ALTER TABLE statement to:<ul>
+<li>Add a new column</li>
+<li>Modify an existing column</li>
+<li>Define a default value for the new column</li>
+<li>Drop a column</li>
+</ul>
+</li>
+</ul>
+<h2 id="dropping-a-table">Dropping a Table</h2>
+<ul>
+<li>All data and structure in the table are deleted.</li>
+<li>Any pending transactions are committed.</li>
+<li>All indexes are dropped.</li>
+<li>All constraints are dropped.</li>
+<li>You cannot roll back the DROP TABLE statement.</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">dept80</span><span class="p">;</span>
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Holicza Barnabás & ELTE
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
