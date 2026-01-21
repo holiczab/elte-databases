@@ -1,8 +1,8 @@
-# Conversion Functions
+## Conversion Functions
 
 ![alt text](../assets/P3/convert.png){ width=700 }
 
-# Implicit Data Type Conversion
+## Implicit Data Type Conversion
 
 For assignments (e.g., in `INSERT`, `UPDATE`, or variable assignments), the Oracle server can **automatically** perform implicit data type conversions for certain compatible types.
 
@@ -20,13 +20,13 @@ For **expression evaluation** (e.g., in `WHERE` clause conditions, `SELECT` list
 | VARCHAR2 or CHAR      | NUMBER    | String must represent a valid number; otherwise, runtime error (ORA-01722) |
 | VARCHAR2 or CHAR      | DATE      | String must match the session's NLS_DATE_FORMAT or be recognizable   |
 
-# Explicit Data Type Conversion
+## Explicit Data Type Conversion
 
 ![alt text](../assets/P3/explicit.png){ width=700 }
 
-# Using the TO_CHAR Function with Dates
+## Using the TO_CHAR Function with Dates
 
-# TO_CHAR(date, 'format_model')
+## TO_CHAR(date, 'format_model')
 
 The format model:
 
@@ -36,7 +36,7 @@ The format model:
 - Has an fm element to remove padded blanks or suppress leading zeros
 - Is separated from the date value by a comma TO_CHAR(date, 'format_model')
 
-# Elements of the Date Format Model
+## Elements of the Date Format Model
 
 | Element | Result                                      | Example (for December 24, 2025 - Wednesday) |
 |---------|---------------------------------------------|---------------------------------------------|
@@ -73,7 +73,7 @@ Number suffixes spell out numbers (ordinal form).
 |----------------|--------------|--------------------------------------------------|
 | ddspth         | fourteenth   | Spells the day with ordinal suffix (e.g., 1st, 2nd, 3rd, 14th) |
 
-# Using the TO_CHAR Function with Dates
+## Using the TO_CHAR Function with Dates
 
 ```sql
 SELECT last_name,
@@ -93,7 +93,7 @@ FROM nikovits.employees;
 | Pataballa   | 5 February 1998   |
 | Lorentz     | 7 February 1999   |
 
-# Using the TO_CHAR Function with Numbers
+## Using the TO_CHAR Function with Numbers
 
 ```sql
 TO_CHAR(number, 'format_model')
@@ -121,7 +121,7 @@ WHERE last_name = 'Ernst';
 |------------|
 | $6,000.00  |
 
-# Using TO_NUMBER and TO_DATE Functions
+## Using TO_NUMBER and TO_DATE Functions
 
 Convert a character string to a number format using the TO_NUMBER function:
 
