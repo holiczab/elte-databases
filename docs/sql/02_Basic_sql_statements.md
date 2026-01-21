@@ -1,24 +1,24 @@
-# Communicating with an RDBMS Using SQL
+## Communicating with an RDBMS Using SQL
 
 ![alt text](../assets/P1/comm.png){ width=700 }
 
-# SQL Statements
+## SQL Statements
 
 ![alt text](../assets/P1/statement_elements.png){ width=700 }
 
-# Order of Statements
+## Order of Statements
 
 ![alt text](../assets/P1/order.png){ width=700 }
 
-# Tables Used in the Course
+## Tables Used in the Course
 
 ![alt text](../assets/P1/used_tables.png){ width=700 }
 
-# Capabilities of SQL SELECT Statements
+## Capabilities of SQL SELECT Statements
 
 ![alt text](../assets/P1/cap.png){ width=700 }
 
-# Basic SELECT Statement
+## Basic SELECT Statement
 
 ```sql
 SELECT * | {[DISTINCT] column|expression [alias], ...}
@@ -28,7 +28,7 @@ FROM table;
 - SELECT identifies the columns to be displayed
 - FROM identifies the table containing those columns
 
-# Selecting All Columns
+## Selecting All Columns
 
 ```sql
 SELECT * FROM nikovits.departments;
@@ -50,7 +50,7 @@ SELECT * FROM nikovits.departments;
 | 120           | Treasury             | NULL       | 1700        |
 | 130           | Corporate Tax        | NULL       | 1700        |
 
-# Selecting Specific Columns
+## Selecting Specific Columns
 
 ```sql
 SELECT department_id, location_id
@@ -76,7 +76,7 @@ FROM nikovits.departments;
 | 150           | 1700        |
 | 160           | 1700        |
 
-# Writing SQL Statements
+## Writing SQL Statements
 
 - SQL statements are not case-sensitive.
 - SQL statements can be on one or more lines.
@@ -85,7 +85,7 @@ FROM nikovits.departments;
 - Indents are used to enhance readability.
 - In SQL*Plus, SQL statements can optionally beterminated by a semicolon (;). Semicolons arerequired if you execute multiple SQLstatements.
 
-# Arithmetic Expressions
+## Arithmetic Expressions
 
 | Operator | Description |
 |----------|-------------|
@@ -94,7 +94,7 @@ FROM nikovits.departments;
 | *        | Multiply   |
 | /        | Divide     |
 
-# Using Arithmetic Operators
+## Using Arithmetic Operators
 
 ```sql
 SELECT last_name, salary, salary + 300
@@ -117,7 +117,7 @@ FROM nikovits.employees;
 | Sciarra      | 7700   | 8000       |
 | Urman        | 7800   | 8100       |
 
-# Operator Precedence
+## Operator Precedence
 
 ```sql
 SELECT last_name, salary, 12*salary+100
@@ -160,7 +160,7 @@ FROM nikovits.employees;
 | Sciarra      | 7700   | 93600           |
 | Urman        | 7800   | 94800           |
 
-# Defining a Null Value
+## Defining a Null Value
 
 - A null is a value that is unavailable, unassigned,unknown, or inapplicable.
 - A null is not the same as a zero or a blank space.
@@ -186,7 +186,7 @@ FROM nikovits.employees;
 | Sciarra      | FI_ACCOUNT   | 7700   | NULL           |
 | Urman        | FI_ACCOUNT   | 7800   | NULL           |
 
-# Null Values in Arithmetic Expressions
+## Null Values in Arithmetic Expressions
 
 Arithmetic expressions containing a null value evaluate to null.
 
@@ -211,14 +211,14 @@ FROM nikovits.employees;
 | Sciarra      | NULL                     |
 | Urman        | NULL                     |
 
-# Defining a Column Alias
+## Defining a Column Alias
 
 - Renames a column heading
 - Is useful with calculations
 - Immediately follows the column name (There canalso be the optional AS keyword between thecolumn name and alias.)
 - Requires double quotation marks if it containsspaces or special characters or if it is case-sensitive
 
-# Using Column Aliases
+## Using Column Aliases
 
 ```sql
 SELECT last_name AS name, commission_pct comm
@@ -262,7 +262,7 @@ FROM nikovits.employees;
 | Sciarra      | 92400         |
 | Urman        | 93600         |
 
-# Concatenation Operator
+## Concatenation Operator
 
 - Links columns or character strings to other columns
 - Is represented by two vertical bars (||)
@@ -289,7 +289,7 @@ FROM nikovits.employees;
 | SciarraFI_ACCOUNT    |
 | UrmanFI_ACCOUNT      |
 
-# Literal Character Strings
+## Literal Character Strings
 
 - A literal is a character, a number, or a date that is included in the SELECT statement.
 - Date and character literal values must beenclosed by single quotation marks.
@@ -301,7 +301,7 @@ AS "Employee Details"
 FROM nikovits.employees;
 ```
 
-# Alternative Quote(q) Operator
+## Alternative Quote(q) Operator
 
 - Specify your own quotation mark delimiter
 - Choose any delimiter (or {}, [], <> pairs)
@@ -315,7 +315,7 @@ SELECT department_name ||
 FROM nikovits.departments;
 ```
 
-# Duplicate Rows
+## Duplicate Rows
 
 ```sql
 SELECT department_id
@@ -361,7 +361,7 @@ FROM nikovits.employees;
 | 60            |
 | 10            |
 
-# SQL Statements Versus SQL*Plus Commands
+## SQL Statements Versus SQL*Plus Commands
 
 | SQL                                      | SQL*Plus                                      |
 |------------------------------------------|-----------------------------------------------|
@@ -371,13 +371,13 @@ FROM nikovits.employees;
 | Statements manipulate data and table definitions in the database | Commands do not allow manipulation of values in the database |
 | Runs in database                         | Runs on a client machine                      |
 
-# Displaying Table Structure
+## Displaying Table Structure
 
 ```sql
 DESCRIBE nikovits.employees
 ```
 
-# Limiting the Rows That Are Selected
+## Limiting the Rows That Are Selected
 
 Restrict the rows that are returned by using the **WHERE** clause.
 
@@ -401,7 +401,7 @@ WHERE department_id = 90 ;
 | 101         | Kochhar   | AD_VP   | 90            |
 | 102         | De Haan   | AD_VP   | 90            |
 
-# Character Strings and Dates
+## Character Strings and Dates
 
 - Character strings and date values are enclosed bysingle quotation marks.
 - Character values are case-sensitive, and date valuesare format-sensitive.
@@ -423,7 +423,7 @@ WHERE last_name = 'Whalen' ;
 |-----------|---------|---------------|
 | Whalen    | AD_ASST | 10            |
 
-# Comparison Conditions
+## Comparison Conditions
 
 | Operator          | Meaning                          |
 |-------------------|----------------------------------|
@@ -460,7 +460,7 @@ WHERE salary <= 3000 ;
 | Gee           | 2400   |
 | Philtanker    | 2200   |
 
-# Use the BETWEEN condition to display rows based on arange of values:
+## Use the BETWEEN condition to display rows based on arange of values:
 
 ```sql
 SELECT last_name, salary
@@ -483,7 +483,7 @@ WHERE salary BETWEEN 2500 AND 3500 ;
 | Mallin        | 3300   |
 | Rogers        | 2900   |
 
-# Use the IN membership condition to test for values in a list:
+## Use the IN membership condition to test for values in a list:
 
 ```sql
 SELECT employee_id, last_name, salary, manager_id
@@ -505,7 +505,7 @@ WHERE manager_id IN (100, 101, 201) ;
 | 145         | Russell      | 14000  | 100        |
 | 146         | Partners     | 13500  | 100        |
 
-# Using the LIKE Condition
+## Using the LIKE Condition
 
 - Use the LIKE condition to perform wildcardsearches of valid search string values.
 - Search conditions can contain either literalcharacters or numbers:
@@ -528,7 +528,7 @@ WHERE first_name LIKE 'S%' ;
 | Stephen      |
 | Sarath       |
 
-# Using the LIKE Condition
+## Using the LIKE Condition
 
 You can use the ESCAPE identifier to search forthe actual % and _ symbols.
 
@@ -555,7 +555,7 @@ WHERE last_name LIKE '_o%' ;
 | Mourgos      |
 | Rogers       |
 
-# Using the NULL Conditions
+## Using the NULL Conditions
 
 ```sql
 SELECT last_name, manager_id
@@ -567,7 +567,7 @@ WHERE manager_id IS NULL ;
 |-----------|------------|
 | King      | NULL       |
 
-# Logical Conditions
+## Logical Conditions
 
 | Operator | Meaning                                      |
 |----------|----------------------------------------------|
@@ -575,9 +575,9 @@ WHERE manager_id IS NULL ;
 | OR       | Returns TRUE if either component condition is true |
 | NOT      | Returns TRUE if the following condition is false |
 
-# 3-valued logic
+## 3-valued logic
 
-## AND Operator
+### AND Operator
 
 | AND   | TRUE | FALSE | NULL |
 |-------|------|-------|------|
@@ -585,7 +585,7 @@ WHERE manager_id IS NULL ;
 | **FALSE** | FALSE| FALSE | FALSE|
 | **NULL**  | NULL | FALSE | NULL |
 
-## OR Operator
+### OR Operator
 
 | OR    | TRUE | FALSE | NULL |
 |-------|------|-------|------|
@@ -593,7 +593,7 @@ WHERE manager_id IS NULL ;
 | **FALSE** | TRUE | FALSE | NULL |
 | **NULL**  | TRUE | NULL  | NULL |
 
-## NOT Operator
+### NOT Operator
 
 | NOT   | Result |
 |-------|--------|
@@ -601,7 +601,7 @@ WHERE manager_id IS NULL ;
 | FALSE | TRUE   |
 | NULL  | NULL   |
 
-# Using the AND Operator
+## Using the AND Operator
 
 ```sql
 SELECT employee_id, last_name, job_id, salary
@@ -620,7 +620,7 @@ AND job_id LIKE '%MAN%' ;
 | 149         | Zlotkey      | SA_MAN  | 10500  |
 | 201         | Hartstein    | MK_MAN  | 13000  |
 
-# Using the OR Operator
+## Using the OR Operator
 
 ```sql
 SELECT employee_id, last_name, job_id, salary
@@ -643,7 +643,7 @@ OR job_id LIKE '%MAN%' ;
 | 124         | Mourgos     | ST_MAN  | 5800   |
 | 145         | Russell     | SA_MAN  | 14000  |
 
-# Using the NOT Operator
+## Using the NOT Operator
 
 ```sql
 SELECT last_name, job_id
@@ -669,7 +669,7 @@ NOT IN ('IT_PROG', 'ST_CLERK', 'SA_REP') ;
 | Tobias       | PU_CLERK   |
 | Himuro       | PU_CLERK   |
 
-# Rules of Precedence
+## Rules of Precedence
 
 Operators in SQL expressions are evaluated according to the following precedence (highest to lowest):
 
@@ -722,7 +722,7 @@ AND salary > 15000;
 |-----------|---------|--------|
 | King      | AD_PRES | 24000  |
 
-# Using the ORDER BY Clause
+## Using the ORDER BY Clause
 
 - Sort retrieved rows with the ORDER BY clause:
     - ASC: ascending order, default
@@ -749,7 +749,7 @@ ORDER BY hire_date ;
 | Faviet      | FI_ACCOUNT | 100           | 16/08/94   |
 | Greenberg   | FI_MGR     | 100           | 17/08/94   |
 
-# Descending order
+## Descending order
 
 ```sql
 SELECT last_name, job_id, department_id, hire_date
@@ -773,7 +773,7 @@ ORDER BY hire_date DESC ;
 | Perkins      | SH_CLERK | 50            | 19/12/99   |
 | Gee          | ST_CLERK | 50            | 12/12/99   |
 
-# Alias
+## Alias
 
 ```sql
 SELECT employee_id, last_name, salary*12 annsal
@@ -796,7 +796,7 @@ ORDER BY annsal ;
 | 191         | Perkins     | 30000  |
 | 143         | Matos       | 31200  |
 
-# Multiple columns
+## Multiple columns
 
 ```sql
 SELECT last_name, department_id, salary
@@ -817,9 +817,9 @@ ORDER BY department_id, salary DESC;
 | Colmenares  | 30            | 2500   |
 | Mavris      | 40            | 6500   |
 
-# Substitution Variables
+## Substitution Variables
 
-# UseSQL*Plus substitution variables to:
+## UseSQL*Plus substitution variables to:
 
 - Temporarily store values with single-ampersand (&) and double-ampersand(&&) substitution
 - Use substitution variables to supplement the following:
@@ -829,7 +829,7 @@ ORDER BY department_id, salary DESC;
     - Table names
     - Entire SELECT statements
 
-# Using the & Substitution Variable
+## Using the & Substitution Variable
 
 Use a variable prefixed with an ampersand (&) to prompt the user for a value:
 
@@ -839,7 +839,7 @@ FROM nikovits.employees
 WHERE employee_id = &employee_num ;
 ```
 
-# Character and Date Values with Substitution Variables
+## Character and Date Values with Substitution Variables
 
 Use single quotation marks for date and character values:
 
@@ -849,7 +849,7 @@ FROM nikovits.employees
 WHERE job_id = '&job_title' ;
 ```
 
-# Specifying Column Names, Expressions, and Text
+## Specifying Column Names, Expressions, and Text
 
 ```sql
 SELECT employee_id, last_name, job_id,&column_name
@@ -858,7 +858,7 @@ WHERE &condition
 ORDER BY &order_column ;
 ```
 
-# Using the && Substitution Variable
+## Using the && Substitution Variable
 
 Use the double ampersand (&&) if you want to reuse the variable value without prompting the user eachtime:
 

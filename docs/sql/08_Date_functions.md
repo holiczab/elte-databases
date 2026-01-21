@@ -1,4 +1,4 @@
-# Working with Dates
+## Working with Dates
 
 - The Oracle database stores dates in an internal numeric format: century, year, month, day, hours, minutes, and seconds.
 - The default date display format is DD-MON-YY. (DD-MON-RR)
@@ -16,12 +16,12 @@ WHERE hire_date < '01-FEB-88';
 | King      | 17/06/87  |
 | Whalen    | 17/09/87  |
 
-# SYSDATE is a function that returns:
+## SYSDATE is a function that returns:
 
 - Date
 - Time
 
-# Arithmetic with Dates
+## Arithmetic with Dates
 
 - Add or subtract a number to or from a date for a resultant date value.
 - Subtract two dates to find the number of days between those dates.
@@ -39,7 +39,7 @@ WHERE department_id = 90;
 | Kochhar   | 1877.451051587301587 |
 | De Haan   | 1704.593908730158730 |
 
-# Date Functions
+## Date Functions
 
 | Function          | Description                              |
 |-------------------|------------------------------------------|
@@ -50,7 +50,7 @@ WHERE department_id = 90;
 | ROUND             | Round date                               |
 | TRUNC             | Truncate date
 
-# Using Date Functions
+## Using Date Functions
 
 | Function                                          | Result             | Explanation                                                                 |
 |---------------------------------------------------|--------------------|-----------------------------------------------------------------------------|

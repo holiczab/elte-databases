@@ -1,8 +1,8 @@
-# Character Functions
+## Character Functions
 
 ![alt text](../assets/P3/charf.png){ width=700 }
 
-# Case-Manipulation Functions in SQL
+## Case-Manipulation Functions in SQL
 
 These functions convert the case for character strings.
 
@@ -14,7 +14,7 @@ These functions convert the case for character strings.
 | UPPER('SQL Course')            | SQL COURSE          | Converts all characters to uppercase             |
 | INITCAP('SQL Course')          | Sql Course          | Converts the first letter of each word to uppercase and the rest to lowercase |
 
-# Using Case-Manipulation Functions
+## Using Case-Manipulation Functions
 
 Display the employee number, name, and department number for employee Higgins:
 
@@ -37,7 +37,7 @@ WHERE LOWER(last_name) = 'higgins';
 |-------------|-----------|---------------|
 | 205         | Higgins   | 110           |
 
-# Character-Manipulation Functions in SQL
+## Character-Manipulation Functions in SQL
 
 These functions manipulate character strings.
 
@@ -54,6 +54,6 @@ These functions manipulate character strings.
 | REPLACE('JACK and JUE', 'J', 'BL')            | BLACK and BLUE          | Replaces all occurrences of 'J' with 'BL'                                   |
 | TRIM('H' FROM 'HelloWorld')                   | elloWorld               | Removes all leading occurrences of 'H' from the string                       |
 
-# Using the Character-Manipulation Functions
+## Using the Character-Manipulation Functions
 
 ![alt text](../assets/P3/usingchar.png){ width=700 }

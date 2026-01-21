@@ -1,15 +1,15 @@
-# Set operators
+## Set operators
 
 ![alt text](../assets/P2/set_op.png){ width=700 }
 
-# Tables Used
+## Tables Used
 
 - EMPLOYEES: Provides details regarding all current employees
 - JOB_HISTORY: Records the details of the start date and end date of the former job, and the job identification number and department when an employee switches jobs
 
 When an employee switches jobs, the details of the start date and end date of the former job, the job identification number, and the department are recorded in the JOB_HISTORY table.
 
-# UNION Operator
+## UNION Operator
 
 ![alt text](../assets/P2/union.png){ width=700 }
 
@@ -44,7 +44,7 @@ FROM nikovits.job_history;
 | 113         | FI_ACCOUNT |
 | 114         | PU_MAN     |
 
-# UNION ALL Operator
+## UNION ALL Operator
 
 ![alt text](../assets/P2/union_all.png){ width=700 }
 
@@ -74,7 +74,7 @@ ORDER BY employee_id;
 | 107         | IT_PROG    | 60            |
 | 108         | FI_MGR     | 100           |
 
-# INTERSECT Operator
+## INTERSECT Operator
 
 ![alt text](../assets/P2/intersect.png){ width=700 }
 
@@ -93,7 +93,7 @@ FROM nikovits.job_history;
 | 176         | SA_REP  |
 | 200         | AD_ASST |
 
-# MINUS Operator
+## MINUS Operator
 
 ![alt text](../assets/P2/minus.png){ width=700 }
 
@@ -123,7 +123,7 @@ FROM nikovits.job_history;
 | 111         | FI_ACCOUNT |
 | 112         | FI_ACCOUNT |
 
-# Set Operator Guidelines
+## Set Operator Guidelines
 
 The expressions in the SELECT lists must match in number and data type.
 - Parentheses can be used to alter the sequence of execution.
@@ -135,7 +135,7 @@ The expressions in the SELECT lists must match in number and data type.
 
 Set operators (such as `UNION`, `UNION ALL`, `INTERSECT`, `MINUS`) combine the results of two or more queries.
 
-### Important Rules
+## Important Rules
 
 **Duplicate rows are automatically eliminated**, except in `UNION ALL`.
 
@@ -152,7 +152,7 @@ Set operators (such as `UNION`, `UNION ALL`, `INTERSECT`, `MINUS`) combine the r
 - `UNION`, `INTERSECT`, and `MINUS` implicitly sort the entire result set in ascending order by all columns (to eliminate duplicates).
 - `UNION ALL` does **not** sort the results—it returns rows in the order they are retrieved.
 
-### Common Set Operators
+## Common Set Operators
 
 | Operator    | Description                                      | Removes Duplicates? | Sorts Result? |
 |-------------|--------------------------------------------------|---------------------|---------------|
@@ -161,7 +161,7 @@ Set operators (such as `UNION`, `UNION ALL`, `INTERSECT`, `MINUS`) combine the r
 | INTERSECT   | Returns rows common to both queries               | Yes                 | Yes           |
 | MINUS       | Returns rows from first query not in second      | Yes                 | Yes           |
 
-# Matching the SELECT Statements
+## Matching the SELECT Statements
 
 Using the UNION operator, display the department ID, location, and hire date for all employees.
 
@@ -216,7 +216,7 @@ FROM nikovits.job_history;
 | 108         | FI_MGR     | 12000  |
 | 109         | FI_ACCOUNT | 9000   |
 
-# Controlling the Order of Rows
+## Controlling the Order of Rows
 
 Produce an English sentence using two UNION operators.
 

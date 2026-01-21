@@ -1,4 +1,4 @@
-# Number Functions in SQL
+## Number Functions in SQL
 
 Number functions perform operations on numeric values.
 
@@ -16,19 +16,19 @@ Number functions perform operations on numeric values.
 | TRUNC(45.926, 2)          | 45.92    | Truncates to 2 decimal places (cuts off excess without rounding)            |
 | MOD(1600, 300)            | 100      | Returns remainder of 1600 ÷ 300 (1600 - 5×300 = 100)                         |
 
-# DUAL Table
+## DUAL Table
 
 **DUAL** is a dummy table that you can use to view results from functions and calculations.
 
-# Using the ROUND Function
+## Using the ROUND Function
 
 ![alt text](../assets/P3/round.png){ width=700 }
 
-# Using the TRUNC Function
+## Using the TRUNC Function
 
 ![alt text](../assets/P3/trunc.png){ width=700 }
 
-# Using the MOD Function
+## Using the MOD Function
 
 For all nikovits.employees with job title of Sales Representative, calculate the remainder of the salary after it is divided by 5,000.
 

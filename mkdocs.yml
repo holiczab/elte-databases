@@ -70,7 +70,7 @@ nav:
   - Relational Algebra: sql/19_Relational_algebra.md
 - PL/SQL Concepts:
   - PL/SQL Basics: pl_sql/01_PL_SQL_basics.md
-  - Cursors and Collections: pl_sql/02_Cursors and collections.md
+  - Cursors and Collections: pl_sql/02_Cursors_and_collections.md
   - Exceptions: pl_sql/03_Exceptions.md
   - Recursion: pl_sql/04_Recurson.md
 - PL/SQL Optimization: pl_sql_optimization/none.md

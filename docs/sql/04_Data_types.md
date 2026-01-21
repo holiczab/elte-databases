@@ -1,5 +1,5 @@
-# Data types
-# Numbers
+## Data types
+## Numbers
 
 - number(x,y) -- x -> precision (number of stored digits), y -> scale (number of decimals, it can be negative)
 - number(x) -- x -> precision (number of stored digits), scale defaults to 0.
@@ -7,7 +7,7 @@
 - numeric(x,y) = number(x,y) (synonyms)
 - positive and natural -- only in PL/SQL (procedural extension of SQL)
 
-# STRINGS
+## STRINGS
 
 - varchar2(17) --Variable length string. Maximal length in paranthesis.
 - varchar(n) = varchar2(n) (synonyms)
@@ -21,7 +21,7 @@
 - In case of varchar comparison, it is different (normal).
     - e.g. SELECT * FROM emp WHERE CAST('str' AS VARCHAR(4)) = 'str'; -> FALSE for all rows
 
-# DATE and TIME
+## DATE and TIME
 
 - DATE data type -- stores date and time with seconds precision
 - ANSI Date literal: DATE '1998-12-25’
@@ -32,7 +32,7 @@
     - ALTER SESSION SET NLS_DATE_LANGUAGE='hungarian'; -- can be english, american, french, german
     - SELECT sysdate FROM dual;SELECT to_char(sysdate, 'day') FROM dual;
 
-# Datearithmethic
+## Datearithmethic
 
 - d+1 -- d plus one day
 - d-2 -- d minus 2 days
@@ -45,7 +45,7 @@
     - d2 > d1 => (+)
     - d2 < d1 => (-)
 
-# TIMESTAMP datatype
+## TIMESTAMP datatype
 
 - Stores fractional seconds as well
 - SELECT SYSTIMESTAMP FROM DUAL; --with Time Zone see NLS_TIMESTAMP_TZ_FORMAT setting
@@ -58,7 +58,7 @@
     - --2020.04.08.11:57:50.274611 +02:00
 - SELECT TO_CHAR(SYSTIMESTAMP,'SSSSS.FF') FROM dual; --seconds past midnight
 
-# CONVERSION
+## CONVERSION
 
 - to_date('2030-OCT-28') -- conversion based on NLS_DATE_FORMAT
 - to_date('2030-12','YYYY-MM') -- giving format elements => 2030-12-01 0:00.00
@@ -70,8 +70,8 @@
 - to_number('135.00167') -- string -> number
 - to_number('abc') -- ORA-01722: invalid number
 
-# Oracle SQL has no boolean type 
-# (PL/SQL has. Literals: TRUE, FALSE, NULL)
+## Oracle SQL has no boolean type 
+## (PL/SQL has. Literals: TRUE, FALSE, NULL)
 
 - NULL value can be in any datatype column.
 - Two nulls are never equal, however it is not true that they are not equal (x <> y).

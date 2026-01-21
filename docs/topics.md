@@ -124,7 +124,7 @@
 - Collections
 
 **Resources:**
-- [Cursors and Collections](pl_sql/02_Cursors and collections.md)
+- [Cursors and Collections](pl_sql/02_Cursors_and_collections.md)
 
 ---
 

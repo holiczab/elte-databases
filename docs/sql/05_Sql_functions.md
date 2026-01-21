@@ -1,12 +1,12 @@
-# SQL Functions
+## SQL Functions
 
 ![alt text](../assets/P3/funct.png){ width=700 }
 
-# Types of SQL Functions
+## Types of SQL Functions
 
 ![alt text](../assets/P3/types.png){ width=700 }
 
-# Single-Row Functions
+## Single-Row Functions
 
 ![alt text](../assets/P3/single.png){ width=700 }
 
